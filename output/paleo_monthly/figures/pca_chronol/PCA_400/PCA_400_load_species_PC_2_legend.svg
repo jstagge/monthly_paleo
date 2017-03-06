@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 216.00 288.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<rect x='52.42' y='73.32' width='111.16' height='141.36' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='56.67' y='85.99' style='font-size: 10.00pt; font-family: Arial;'>Species</text>
+<rect x='56.67' y='89.40' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='90.11' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #66C2A5;' />
+<rect x='56.67' y='106.69' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='107.40' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #FC8D62;' />
+<rect x='56.67' y='123.98' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='124.69' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #8DA0CB;' />
+<rect x='56.67' y='141.27' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='141.98' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #E78AC3;' />
+<rect x='56.67' y='158.56' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='159.27' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #A6D854;' />
+<rect x='56.67' y='175.85' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='176.56' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #FFD92F;' />
+<rect x='56.67' y='193.14' width='17.29' height='17.29' style='stroke-width: 1.07; stroke: #CCCCCC; fill: #FFFFFF;' />
+<rect x='57.38' y='193.85' width='15.87' height='15.87' style='stroke-width: 1.07; stroke-linejoin: miter; fill: #E5C494;' />
+<text x='76.12' y='101.38' style='font-size: 8.00pt; font-family: Arial;'>Colorado pinyon</text>
+<text x='76.12' y='118.67' style='font-size: 8.00pt; font-family: Arial;'>Douglas fir</text>
+<text x='76.12' y='135.96' style='font-size: 8.00pt; font-family: Arial;'>Limber pine</text>
+<text x='76.12' y='153.25' style='font-size: 8.00pt; font-family: Arial;'>Ponderosa pine</text>
+<text x='76.12' y='170.54' style='font-size: 8.00pt; font-family: Arial;'>Rocky Mountain juniper</text>
+<text x='76.12' y='187.83' style='font-size: 8.00pt; font-family: Arial;'>Singleleaf pinyon</text>
+<text x='76.12' y='205.11' style='font-size: 8.00pt; font-family: Arial;'>Utah juniper</text>
+</svg>

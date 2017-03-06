@@ -1,0 +1,138 @@
+<DIF xmlns="http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/ http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/dif_v9.8.4.xsd">
+  <Entry_ID>noaa-recon-16074</Entry_ID>
+  <Entry_Title>Logan River, Utah 400 Year Streamflow Reconstructions</Entry_Title>
+  <Data_Set_Citation>
+    <Dataset_Creator>Allen, E.B.; Rittenour, T.M.; DeRose, R.J.; Bekker, M.F.; Kjelgren, R.; Buckley, B.M.</Dataset_Creator>
+    <Dataset_Title>Logan River, Utah 400 Year Streamflow Reconstructions</Dataset_Title>
+    <Dataset_Release_Date>2014-02-08</Dataset_Release_Date>
+    <Dataset_Publisher>NCDC-Paleoclimatology</Dataset_Publisher>
+    <Data_Presentation_Form>Online Files</Data_Presentation_Form>
+    <Online_Resource>https://www.ncdc.noaa.gov/paleo/study/16074</Online_Resource>
+  </Data_Set_Citation>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>E.B.</First_Name>
+    <Last_Name>Allen</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>T.M.</First_Name>
+    <Last_Name>Rittenour</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>R.J.</First_Name>
+    <Last_Name>DeRose</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>M.F.</First_Name>
+    <Last_Name>Bekker</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>R.</First_Name>
+    <Last_Name>Kjelgren</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>B.M.</First_Name>
+    <Last_Name>Buckley</Last_Name>
+  </Personnel>
+  <Parameters>
+    <Category>earth science</Category>
+    <Topic>paleoclimate</Topic>
+    <Term>reconstructions</Term>
+    <Variable_Level_1>streamflow</Variable_Level_1>
+  </Parameters>
+  <ISO_Topic_Category>geoscientificInformation</ISO_Topic_Category>
+  <Keyword>hydrology</Keyword>
+  <Paleo_Temporal_Coverage>
+    <Paleo_Start_Date>1605 AD</Paleo_Start_Date>
+    <Paleo_Stop_Date>2010 AD</Paleo_Stop_Date>
+  </Paleo_Temporal_Coverage>
+  <Paleo_Temporal_Coverage>
+    <Paleo_Start_Date>345 cal yr BP</Paleo_Start_Date>
+    <Paleo_Stop_Date>-60 cal yr BP</Paleo_Stop_Date>
+  </Paleo_Temporal_Coverage>
+  <Data_Set_Progress>Complete</Data_Set_Progress>
+  <Spatial_Coverage>
+    <Southernmost_Latitude>41.7444</Southernmost_Latitude>
+    <Northernmost_Latitude>41.7444</Northernmost_Latitude>
+    <Westernmost_Longitude>-111.7836</Westernmost_Longitude>
+    <Easternmost_Longitude>-111.7836</Easternmost_Longitude>
+    <Minimum_Altitude>1427</Minimum_Altitude>
+    <Maximum_Altitude>1427</Maximum_Altitude>
+  </Spatial_Coverage>
+  <Location>
+    <Location_Category>Continent</Location_Category>
+    <Location_Type>North America</Location_Type>
+    <Location_Subregion1>United States Of America</Location_Subregion1>
+    <Location_Subregion2>Utah</Location_Subregion2>
+    <Detailed_Location>Logan River USGS10109001::LATITUDE 41.7444::LONGITUDE -111.7836</Detailed_Location>
+  </Location>
+  <Access_Constraints>None</Access_Constraints>
+  <Use_Constraints>Please cite original references when using this data.</Use_Constraints>
+  <Data_Set_Language>English</Data_Set_Language>
+  <Data_Center>
+    <Data_Center_Name>
+      <Short_Name>DOC/NOAA/NESDIS/NCDC</Short_Name>
+      <Long_Name>National Climatic Data Center, NESDIS, NOAA, U.S. Department of Commerce </Long_Name>
+    </Data_Center_Name>
+    <Data_Center_URL>http://www.ncdc.noaa.gov/paleo/</Data_Center_URL>
+    <Personnel>
+      <Role>DATA Center Contact</Role>
+      <First_Name>Bruce</First_Name>
+      <Last_Name>Bauer</Last_Name>
+      <Email>bruce.a.bauer@noaa.gov</Email>
+      <Email>paleo@noaa.gov</Email>
+      <Phone>303-497-6280</Phone>
+      <Fax>303-497-6513</Fax>
+      <Contact_Address>
+        <Address>325 Broadway, E/CC23</Address>
+        <City>Boulder</City>
+        <Province_or_State>CO</Province_or_State>
+        <Postal_Code>80305-3328</Postal_Code>
+        <Country>USA</Country>
+      </Contact_Address>
+    </Personnel>
+  </Data_Center>
+  <Distribution>
+    <Distribution_Media>online</Distribution_Media>
+    <Distribution_Format>ASCII</Distribution_Format>
+  </Distribution>
+  <Reference>
+    <Author>Eric B. Allen, Tammy M. Rittenour, R. Justin DeRose, Matthew F. Bekker, Roger Kjelgren, Brendan M. Buckley </Author>
+    <Publication_Date>2013</Publication_Date>
+    <Title>A tree-ring based reconstruction of Logan River streamflow, northern Utah</Title>
+    <Series>Water Resources Research</Series>
+    <Volume>49</Volume>
+    <Issue>12</Issue>
+    <Pages>8579-8588</Pages>
+    <DOI>10.1002/2013WR014273</DOI>
+    <Online_Resource>http://onlinelibrary.wiley.com/doi/10.1002/2013WR014273/abstract</Online_Resource>
+  </Reference>
+  <Summary>
+    <Abstract>We created six new tree-ring chronologies in northern Utah, which were used with preexisting chronologies from Utah and western Wyoming to reconstruct mean annual flow for the Logan River, the largest tributary of the regionally important Bear River. Two reconstruction models were developed, a &quot;Local&quot; model that incorporated two Rocky Mountain juniper chronologies located within the basin, and a &quot;Regional&quot; model that also included limber pine and pinyon pine chronologies from a larger area. The Local model explained 48.2% of the variability in the instrumental record and the juniper chronologies better captured streamflow variability than Douglas-fir collected within the Logan basin. Incorporating chronologies from the northern and southern margins of the transition zone of the western precipitation dipole increased the skill of the Regional model (r2 = 0.581). We suggest the increased Regional model skill indicates that both nodes of the western precipitation dipole influence northern Utah climate. The importance of Rocky Mountain juniper in both reconstructions of streamflow for this region suggests that future work should target these trees where more traditionally desirable species are not present. The reconstructions provide the first extended record of streamflow in northern Utah. Preinstrumental streamflows (1605-1921) exhibited considerable variability when compared to the instrumental period (1922-2005). Our findings confirm that the inherent uncertainty in contemporary water management and planning in the region is due to hydroclimatic variability that has persisted for at least the last four centuries. 
+          STUDY NOTES: The population of semi-arid northern Utah depends on rivers to deliver water stored in mountain snowpack to population centers in the semi-arid valleys of northern Utah. The Logan River is an important tributary to the Bear River, which in turn is the largest stream flowing into the Great Salt Lake. Previously, there were no streamflow reconstructions for the Wasatch Front, and few tree-ring chronologies existed from which reconstructions are typically developed.
+ 
+We used two groups of predictors to model Logan River water year MAF: a Local model that considered predictors within 100 km of the basin boundary, and the Regional model that considered all predictors within an area of putatively similar hydroclimate. Each group of predictors were entered into a stepwise linear regression model ordered by their correlation to Logan River MAF. Predictors were retained based on AIC. The models were verified using a split calibration procedure. The model skill of split and full calibration were assessed using r2, adjusted r2, reduction of error (RE), coefficient of
+efficiency (CE), and the PRESS statistic. Both models begin in 1605 with the Regional model ending in 2005 while the Local model terminates in 2010.
+ 
+Naturalized mean annual water year flow data used to calibrate the models were obtained from USGS gage 10109001 for the period 1922-2005. Units are cubic meters per second.  Sample depth includes all chronologies in a model for a given year.</Abstract>
+  </Summary>
+  <Related_URL>
+    <URL_Content_Type>
+      <Type>GET DATA</Type>
+    </URL_Content_Type>
+    <URL>ftp://ftp.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/northamerica/usa/utah/logan2013flow.txt</URL>
+    <Description>Data File</Description>
+  </Related_URL>
+  <IDN_Node>
+    <Short_Name>USA/NOAA</Short_Name>
+  </IDN_Node>
+  <Metadata_Name>DIF</Metadata_Name>
+  <Metadata_Version>Version 9.8.4</Metadata_Version>
+  <DIF_Creation_Date>2014-02-18</DIF_Creation_Date>
+  <Last_DIF_Revision_Date>2014-02-18</Last_DIF_Revision_Date>
+</DIF>

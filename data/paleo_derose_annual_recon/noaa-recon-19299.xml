@@ -1,0 +1,147 @@
+<DIF xmlns="http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/ http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/dif_v9.8.4.xsd">
+  <Entry_ID>noaa-recon-19299</Entry_ID>
+  <Entry_Title>Bear River, Utah 1,200 Year Streamflow Reconstruction</Entry_Title>
+  <Data_Set_Citation>
+    <Dataset_Creator>DeRose, R.J.; Bekker, M.F.; Wang, S.-Y.; Buckley, B.M.; Kjelgren, R.; Bardsley, T.; Rittenour, T.M.; Allen, E.B.; </Dataset_Creator>
+    <Dataset_Title>Bear River, Utah 1,200 Year Streamflow Reconstruction</Dataset_Title>
+    <Dataset_Release_Date>2015-09-29</Dataset_Release_Date>
+    <Dataset_Publisher>NCDC-Paleoclimatology</Dataset_Publisher>
+    <Data_Presentation_Form>Online Files</Data_Presentation_Form>
+    <Online_Resource>https://www.ncdc.noaa.gov/paleo/study/19299</Online_Resource>
+  </Data_Set_Citation>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>R.J.</First_Name>
+    <Last_Name>DeRose</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>M.F.</First_Name>
+    <Last_Name>Bekker</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>S.-Y.</First_Name>
+    <Last_Name>Wang</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>B.M.</First_Name>
+    <Last_Name>Buckley</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>R.</First_Name>
+    <Last_Name>Kjelgren</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>T.</First_Name>
+    <Last_Name>Bardsley</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>T.M.</First_Name>
+    <Last_Name>Rittenour</Last_Name>
+  </Personnel>
+  <Personnel>
+    <Role>Investigator</Role>
+    <First_Name>E.B.</First_Name>
+    <Last_Name>Allen</Last_Name>
+  </Personnel>
+  <Parameters>
+    <Category>earth science</Category>
+    <Topic>paleoclimate</Topic>
+    <Term>reconstructions</Term>
+    <Variable_Level_1>streamflow</Variable_Level_1>
+  </Parameters>
+  <ISO_Topic_Category>geoscientificInformation</ISO_Topic_Category>
+  <Keyword>Streamflow Reconstruction</Keyword>
+  <Keyword>JUOS</Keyword>
+  <Keyword>Juniperus osteosperma (Torr.) Little</Keyword>
+  <Keyword>Utah juniper</Keyword>
+  <Paleo_Temporal_Coverage>
+    <Paleo_Start_Date>800 AD</Paleo_Start_Date>
+    <Paleo_Stop_Date>2010 AD</Paleo_Stop_Date>
+  </Paleo_Temporal_Coverage>
+  <Paleo_Temporal_Coverage>
+    <Paleo_Start_Date>1150 cal yr BP</Paleo_Start_Date>
+    <Paleo_Stop_Date>-60 cal yr BP</Paleo_Stop_Date>
+  </Paleo_Temporal_Coverage>
+  <Data_Set_Progress>Complete</Data_Set_Progress>
+  <Spatial_Coverage>
+    <Southernmost_Latitude>40.9653</Southernmost_Latitude>
+    <Northernmost_Latitude>40.9653</Northernmost_Latitude>
+    <Westernmost_Longitude>-110.8528</Westernmost_Longitude>
+    <Easternmost_Longitude>-110.8528</Easternmost_Longitude>
+    <Minimum_Altitude>2428</Minimum_Altitude>
+    <Maximum_Altitude>2428</Maximum_Altitude>
+  </Spatial_Coverage>
+  <Location>
+    <Location_Category>Continent</Location_Category>
+    <Location_Type>North America</Location_Type>
+    <Location_Subregion1>United States Of America</Location_Subregion1>
+    <Location_Subregion2>Utah</Location_Subregion2>
+    <Detailed_Location>Bear River Headwaters (USGS gage 10011500)::LATITUDE 40.9653::LONGITUDE -110.8528</Detailed_Location>
+  </Location>
+  <Access_Constraints>None</Access_Constraints>
+  <Use_Constraints>Please cite original references when using this data.</Use_Constraints>
+  <Data_Set_Language>English</Data_Set_Language>
+  <Data_Center>
+    <Data_Center_Name>
+      <Short_Name>DOC/NOAA/NESDIS/NCEI</Short_Name>
+      <Long_Name>National Centers for Environmental Information, NESDIS, NOAA, U.S. Department of Commerce </Long_Name>
+    </Data_Center_Name>
+    <Data_Center_URL>https://www.ncdc.noaa.gov/data-access/paleoclimatology-data</Data_Center_URL>
+    <Personnel>
+      <Role>DATA Center Contact</Role>
+      <First_Name>Bruce</First_Name>
+      <Last_Name>Bauer</Last_Name>
+      <Email>bruce.a.bauer@noaa.gov</Email>
+      <Email>paleo@noaa.gov</Email>
+      <Phone>303-497-6280</Phone>
+      <Fax>303-497-6513</Fax>
+      <Contact_Address>
+        <Address>325 Broadway, E/CC23</Address>
+        <City>Boulder</City>
+        <Province_or_State>CO</Province_or_State>
+        <Postal_Code>80305-3328</Postal_Code>
+        <Country>USA</Country>
+      </Contact_Address>
+    </Personnel>
+  </Data_Center>
+  <Distribution>
+    <Distribution_Media>online</Distribution_Media>
+    <Distribution_Format>ASCII</Distribution_Format>
+  </Distribution>
+  <Reference>
+    <Author>R.J. DeRose, M.F. Bekker, S.-Y. Wang, B.M. Buckley, R.K. Kjelgren, T. Bardsley, T.M. Rittenour, E.B. Allen</Author>
+    <Publication_Date>2015</Publication_Date>
+    <Title>A millennium-length reconstruction of Bear River stream flow, Utah</Title>
+    <Series>Journal of Hydrology</Series>
+    <Volume>529</Volume>
+    <Issue>2</Issue>
+    <Pages>524-534</Pages>
+    <DOI>10.1016/j.jhydrol.2015.01.014</DOI>
+    <Online_Resource>http://www.sciencedirect.com/science/article/pii/S0022169415000311</Online_Resource>
+  </Reference>
+  <Summary>
+    <Abstract>The Bear River contributes more water to the eastern Great Basin than any other river system. It is also the most significant source of water for the burgeoning Wasatch Front metropolitan area in northern Utah. Despite its importance for water resources for the region&apos;s agricultural, urban, and wildlife needs, our understanding of the variability of Bear River&apos;s stream flow derives entirely from the short instrumental record (1943-2010). Here we present a 1200-year calibrated and verified tree-ring reconstruction of stream flow for the Bear River that explains 67% of the variance of the instrumental record over the period from 1943 to 2010. Furthermore, we developed this reconstruction from a species that is not typically used for dendroclimatology, Utah juniper (Juniperus osteosperma). We identify highly significant periodicity in our reconstruction at quasi-decadal (7-8 year), multi-decadal (30 year), and centennial (&gt;50 years) scales. The latter half of the 20th century was found to be the 2nd wettest (~40-year) period of the past 1200 years, while the first half of the 20th century marked the 4th driest period. The most severe period of reduced stream flow occurred during the Medieval Warm Period (ca. mid-1200s CE) and persisted for ~70 years. Upper-level circulation anomalies suggest that atmospheric teleconnections originating in the western tropical Pacific are responsible for the delivery of precipitation to the Bear River watershed during the October-December (OND) season of the previous year. The Bear River flow was compared to recent reconstructions of the other tributaries to the Great Salt Lake (GSL) and the GSL level. Implications for water management could be drawn from the observation that the latter half of the 20th century was the 2nd wettest in 1200 years, and that management for future water supply should take into account the stream flow variability over the past millennium. 
+          STUDY NOTES: Tree-ring-based reconstruction of Bear River, Utah streamflow over the past 1200 years.   Utah Juniper tree-ring data are archived in the International Tree-Ring Data Bank, Site Code UT541: 
+https://www.ncdc.noaa.gov/paleo/study/19359</Abstract>
+  </Summary>
+  <Related_URL>
+    <URL_Content_Type>
+      <Type>GET DATA</Type>
+    </URL_Content_Type>
+    <URL>http://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/northamerica/usa/utah/bear2015flow.txt</URL>
+    <Description>Data File</Description>
+  </Related_URL>
+  <IDN_Node>
+    <Short_Name>USA/NOAA</Short_Name>
+  </IDN_Node>
+  <Metadata_Name>DIF</Metadata_Name>
+  <Metadata_Version>Version 9.8.4</Metadata_Version>
+  <DIF_Creation_Date>2015-10-13</DIF_Creation_Date>
+  <Last_DIF_Revision_Date>2015-10-13</Last_DIF_Revision_Date>
+</DIF>

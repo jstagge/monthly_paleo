@@ -1,0 +1,50 @@
+Name,ID,State,spp,Elev_m,Lat ,Lon,Corr,Sens,group,family,genus,species,common_name
+Big Flat Ridge,BFL,UT,pifl,3000,40.56,-111.58,0.55,0.176,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Big Flat Ridge ,BFD,UT,psme,3000,40.56,-111.58,0.653,0.173,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Card Canyon,CCU,UT,juos,1700,41.7587,-111.662559,0.661,0.269,Gymnosperm,Cupressaceae,juniperus,osteosperma,Utah juniper
+Cottonwood Lake,CLD,WY,psme,2500,42.6367,-110.807059,0.741,0.246,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Crawford Mountain,CMP,UT,pied,2345,41.654,-111.111,0.813,0.458,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Crawford Mountain,CMU,UT,juos,2345,41.654,-111.111,0.824,0.641,Gymnosperm,Cupressaceae,juniperus,osteosperma,Utah juniper
+Eureka,EUR,UT,pimo,2070,39.9898,-112.175003,0.678,0.325,Gymnosperm,Pinaceae,pinus,monophylla,Singleleaf pinyon
+Hartley Canyon,HCD,ID,psme,2245,42.4147,-112.9753,0.597,0.236,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Jardine Juniper Trail,JTD,UT,psme,2100,41.81,-111.63,0.67,0.193,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Jardine Juniper Trail,JTL,UT,pifl,2100,41.81,-111.63,0.591,0.183,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Jardine Juniper Trail,JTR,UT,jusc,2100,41.81,-111.63,0.605,0.227,Gymnosperm,Cupressaceae,juniperus,scopulorum,Rocky Mountain juniper
+Jones Hole,JHD,UT,psme,1770,40.5954,-109.073,0.799,0.343,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Left Hand Fork,LFR,UT,jusc,1980,41.65,-111.71,0.661,0.274,Gymnosperm,Cupressaceae,juniperus,scopulorum,Rocky Mountain juniper
+Left Hand Fork,LFU,UT,juos,1980,41.65,-111.71,0.555,0.295,Gymnosperm,Cupressaceae,juniperus,osteosperma,Utah juniper
+Logan Dry Canyon,LDS,UT,pimo,2040,41.7326,-111.768267,0.606,0.242,Gymnosperm,Pinaceae,pinus,monophylla,Singleleaf pinyon
+Magog Peak,MAP,UT,pifl,2730,41.9089,-111.657997,0.538,0.179,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Maguire Canyon,MCD,UT,psme,2133,41.3661,-111.978996,0.691,0.248,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Maguire Canyon,MCL,UT,pifl,2133,41.3661,-111.978996,0.52,0.234,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Naomi Peak,NAD,UT,psme,2730,41.9089,-111.657997,0.595,0.174,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Paris Peak,PPD,ID,psme,2750,42.2004,-111.547996,0.524,0.189,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Raft River Range,RRU,UT,juos,1828,41.9562,-113.320999,0.791,0.664,Gymnosperm,Cupressaceae,juniperus,osteosperma,Utah juniper
+Raft River Range,RRS,UT,pimo,1828,41.9562,-113.320999,0.774,0.461,Gymnosperm,Pinaceae,pinus,monophylla,Singleleaf pinyon
+Rattlesnake Mountain,RSM,UT,pied,2130,40.2565,-111.416999,0.688,0.311,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Red Canyon,RCP,UT,pipo,2280,38.94,-112.06,0.745,0.352,Gymnosperm,Pinaceae,pinus,ponderosa,Ponderosa pine
+Red Canyon,RCD,UT,psme,2280,38.94,-112.06,0.805,0.371,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Red Canyon,RCC,UT,pied,2280,38.94,-112.06,0.71,0.347,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Richards Hollow,RWD,UT,psme,1990,41.6787,-111.665834,0.681,0.183,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Right Hand Fork,RFD,UT,psme,2000,41.751,-111.593911,0.706,0.21,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Right Hand Fork,RFR,UT,jusc,2000,41.751,-111.593911,0.614,0.297,Gymnosperm,Cupressaceae,juniperus,scopulorum,Rocky Mountain juniper
+Salt Creek Abandonded Road,SCD,WY,psme,2000,42.4015,-111.016335,0.715,0.257,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Salt Creek Abandonded Road,SCR,WY,jusc,2000,42.4015,-111.016335,0.658,0.375,Gymnosperm,Cupressaceae,juniperus,scopulorum,Rocky Mountain juniper
+South Fork Chalk Creek,SFC,UT,juos,2160,40.9234,-111.206034,0.81,0.465,Gymnosperm,Cupressaceae,juniperus,osteosperma,Utah juniper
+Tanner Ridge,TRC,UT,pied,1960,40.14,-111.335,0.733,0.307,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Upper Schulman (Logan Canyon),SPD,UT,psme,2540,41.9582,-111.481489,0.722,0.231,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Westin-Baldy Mtn,WBD,ID,psme,2340,42.147,-112.066694,0.683,0.238,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Whiskey Flat Road,WFR,ID,psme,2130,42.4354,-111.190511,0.726,0.252,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Willard Ridge,WRD,UT,psme,2750,41.3669,-111.966003,0.592,0.213,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Willard Ridge,WRL,UT,pifl,2750,41.3669,-111.966003,0.536,0.191,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Sunlight Basin,SBD,WY,psme,2000,44.75,-109.39,0.754,0.474,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Sunlight Basin,SBL,WY,pifl,2000,44.75,-109.39,0.758,0.414,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Dutch John Mountain,DJM,UT,pied,2190,40.58,-109.25,0.824,0.438,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Well's Draw,WEL,UT,pied,2145,39.5,-110.1,0.823,0.436,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Harmon Canyon,HAR,UT,psme,2134,39.48,-110.2,0.843,0.481,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Plug Hat Butte,PHB,CO,pied,2133,40.78,-108.97,0.834,0.474,Gymnosperm,Pinaceae,pinus,edulis,Colorado pinyon
+Whiskey Mountain,WSK,WY,psme,2696,43.43,-109.55,0.845,0.488,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Fremont Lake,FMT,WY,psme,2430,42.96,-109.76,0.763,0.312,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Boulder Lake,BLE,WY,psme,2431,42.85,-109.63,0.778,0.345,Gymnosperm,Pinaceae,pseudotsuga,menziesii,Douglas fir
+Anderson ,ARE,WY,pifl,2431,42.45,-108.86,0.707,0.324,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
+Louis Lake Road,LLR,WY,pifl,2731,42.55,-108.81,0.732,0.276,Gymnosperm,Pinaceae,pinus,flexilis,Limber pine
