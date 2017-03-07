@@ -4,7 +4,8 @@
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
-# | PURPOSE:  Fill me in         
+# | PURPOSE:  This script will install any packages needed for the subsequent
+# |				code and will create the output folder structure to hold results.     
 # |
 # *------------------------------------------------------------------
 # | COMMENTS:               
@@ -49,9 +50,26 @@ if(length(packages_needed)) install.packages(packages_needed)
 
 
 ###########################################################################
+## Set the Paths
+###########################################################################
+### Path for Data and Output	
+data_path <- "../data"
+output_path <- "../output"
+global_path <- "./global_func"
+function_path <- "./functions"
+
+###########################################################################
 ###  Generate folder structure
 ###########################################################################
+### Create output folder
+dir.create(output_path)
 
+### Create subfolders
+dir.create(file.path(output_path, "figures"))
+dir.create(file.path(output_path, "gof"))
+dir.create(file.path(output_path, "observed_utah_flow"))
+dir.create(file.path(output_path, "pca_chronol"))
+dir.create(file.path(output_path, "paleo_reconst"))
 
 
 
