@@ -2,12 +2,12 @@
 
 This repository contains code designed to disaggregate and reconstruct monthly streamflows directly from annual streamflow reconstructions, reconstructions of global circulation, and potential differences among regional tree-ring chronologies related to tree species and geographic location. It is presented here to replicate the results in [Stagge et al. (2017)](http://) and to provide a reference for others wishing to use these methods to reconstruct streamflow records.  
 
-An subset of the reconstruction is shown below as an example. Users can interact with the entire reconstruction at [Monthly Paleostreamflow Explorer](https://jstagge.shinyapps.io/paleo_flow)
+An subset of the reconstruction is shown below as an example. Users can interact with the entire reconstruction at the [Monthly Paleostreamflow Explorer](https://jstagge.shinyapps.io/paleo_flow)
 
 <figure>
- <img src="http://placekitten.com/200/300" alt="Small picture of a kitten" />
+ <img src="reconst_example.png" alt="Monthly reconstruction example" />
  <figcaption>
- Small picture of a kitten, graciously shared by <a href="http://placekitten.com">placekitten.com</a>
+ Reconstructed flows at the Logan river site for subsets of the (a) historical and (b) observed periods. Reproduces from Stagge et al. (2017).
  </figcaption>
 </figure>
 
@@ -22,7 +22,7 @@ In order to run this code, you must install:
 
 All necesary R packages will be installed automatically in the first file.
 
-### Running the Code
+### Running the Code (All Scripts)
 
 Code is numbered in order of operations.  If you would like to simply recreate the results of [Stagge et al. (2017)](http://), you may run the following from any command line after installing R. For more detailed information about each file, see below:
 
@@ -40,6 +40,7 @@ Rscript 09_apr_model_predictors_reconstruct.R
 Rscript 10_plot_gof_results.R
 ```
 
+### Running the Code (Step by Step)
 The following file prepares the file system, installing any necesary packages and creating folders for model output.
 
 ```
