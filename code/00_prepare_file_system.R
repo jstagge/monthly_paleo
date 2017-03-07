@@ -37,7 +37,7 @@ rm(list=ls())
 ###  Check for necessary packages and install if needed
 ###########################################################################
 ### Set a list of packages
-list_of_packages <- c("assertthat", "zoo", "data.table", "ggplot2", "fitdistrplus", "maps", "ggmap", "gridExtra", "ggrepel", "dataRetrieval", "missMDA", "reshape2", "svglite")
+list_of_packages <- c("assertthat", "zoo", "data.table", "ggplot2", "fitdistrplus", "maps", "ggmap", "gridExtra", "ggrepel", "dataRetrieval", "missMDA", "reshape2", "svglite", "lubridate")
 
 ### Determine which packages are missing
 package_list <- installed.packages()[,"Package"]
