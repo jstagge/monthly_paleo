@@ -58,7 +58,6 @@ require(colorout)
 require(assertthat)
 
 ### Load these functions for this unique project
-require(ncdf4)
 
 ### Load project specific functions
 file.sources = list.files(function_path, pattern="*.R", recursive=TRUE)
