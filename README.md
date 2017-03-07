@@ -22,7 +22,9 @@ In order to run this code, you must install:
 
 All necesary R packages will be installed automatically in the first file.
 
-### Running the Code (All Scripts)
+## Running the Code
+
+### Running all scripts at once
 
 Code is numbered in order of operations.  If you would like to simply recreate the results of [Stagge et al. (2017)](http://), you may run the following from any command line after installing R. For more detailed information about each file, see below:
 
@@ -40,7 +42,7 @@ Rscript 09_apr_model_predictors_reconstruct.R
 Rscript 10_plot_gof_results.R
 ```
 
-### Running the Code (Step by Step)
+### Running scripts step-by-step
 The following file prepares the file system, installing any necesary packages and creating folders for model output.
 
 ```
