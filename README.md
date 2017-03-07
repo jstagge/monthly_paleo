@@ -72,9 +72,11 @@ Rscript 10_plot_gof_results.R
 ## Reference and How to Cite
 
 For any description of this methodology, please use the following citation:
-*Stagge, J.H., Rosenberg, D.E., DeRose, R.J., and Rittenour, T.M. (2017) "Monthly paleostream-flow reconstruction from annual tree-ring chronologies." Journal of Hydrology.
+
+* Stagge, J.H., Rosenberg, D.E., DeRose, R.J., and Rittenour, T.M. (2017) "Monthly paleostream-flow reconstruction from annual tree-ring chronologies." Journal of Hydrology.
 
 For any use of this code, please cite the above paper and the following:
+
 * I will apply to zenodo to get a DOI for this.
 
 ## Authors
