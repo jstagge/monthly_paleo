@@ -1,13 +1,11 @@
 # *------------------------------------------------------------------
-# | PROGRAM NAME: 03_ap_model
-# | FILE NAME: 03_ap_model.R
+# | PROGRAM NAME: 03_ap_model_fit
+# | FILE NAME: 03_ap_model_fit.R
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
-# | PURPOSE:  This is a code wrapper to run the Annual Percentile (AP) model.
-# | It fits cumulative probability distributions for annual and monthly flows
-# | and then reconstructs monthly flows by assuming the reconstructed annual 
-# | percentile is equivalent to the monthly percentile for the entire water year.
+# | PURPOSE:  This is a code wrapper to fit the Annual Percentile (AP) model.
+# | It fits cumulative probability distributions for annual and monthly flows.
 # |
 # |
 # *------------------------------------------------------------------
