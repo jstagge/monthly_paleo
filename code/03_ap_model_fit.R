@@ -1,13 +1,14 @@
 # *------------------------------------------------------------------
-# | PROGRAM NAME: Data Music
-# | FILE NAME: paleo_monthly_gen_null.R
+# | PROGRAM NAME: 03_ap_model
+# | FILE NAME: 03_ap_model.R
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
-# | PURPOSE:  This is a code wrapper to generate a midicsv file from data.
-# | The resulting file can be processed into a midi file using the program csvmidi.
-# | This midi file can then be played using timidity.
-# | Check the ToRun.txt file for detailed code             
+# | PURPOSE:  This is a code wrapper to run the Annual Percentile (AP) model.
+# | It fits cumulative probability distributions for annual and monthly flows
+# | and then reconstructs monthly flows by assuming the reconstructed annual 
+# | percentile is equivalent to the monthly percentile for the entire water year.
+# |
 # |
 # *------------------------------------------------------------------
 # | COMMENTS:               
@@ -17,7 +18,11 @@
 # |  3: 
 # |*------------------------------------------------------------------
 # | DATA USED:               
-# | This is a test instance using reconstructed climate indices ENSO and PDO
+# | USGS gauge flow data
+# | Annual reconstructions from:
+# | Allen, E.B., Rittenour, T.M., DeRose, R.J., Bekker, M.F., Kjelgren, R., Buckley, B.M., 2013. A tree-ring based reconstruction of Logan River streamflow, northern Utah. Water Resources Research 49, 8579–8588. doi:10.1002/2013WR014273.
+# |
+# | DeRose, R.J., Bekker, M.F., Wang, S.Y., Buckley, B.M., Kjelgren, R.K., Bardsley, T., Rittenour, T.M., Allen, E.B., 2015. A millennium-length reconstruction of Bear River stream flow, Utah. Journal of Hydrology 529, Part 2, 524–534. doi:10.1016/j.jhydrol.2015.01.014.
 # |
 # |*------------------------------------------------------------------
 # | CONTENTS:               
@@ -30,7 +35,7 @@
 # |
 # |
 # *------------------------------------------------------------------
- 
+
 ### Clear any existing data or functions.
 rm(list=ls())
 
@@ -38,23 +43,25 @@ rm(list=ls())
 ## Set the Paths
 ###########################################################################
 ### Path for Data and Output	
-data_path <- "../../data"
-output_path <- "../../output"
-global_path <- "../global_func"
+data_path <- "../data"
+output_path <- "../output"
+global_path <- "./global_func"
 function_path <- "./functions"
 
-### Set global output location
-output_path <- file.path(output_path,"paleo_monthly")
-output_name <- "percentile_model"
+### Set specific output location
+output_name <- "ap_model"
+write_output_base_path <- file.path(file.path(output_path, "paleo_reconst"), output_name)
+write_figures_base_path <- file.path(file.path(output_path,"figures"),output_name)
 
-write_output_path <- file.path(file.path(output_path, "paleo_monthly_gen"), output_name)
-write_figures_path <- file.path(file.path(output_path,"figures"),output_name)
+### Create output folders
+dir.create(write_output_base_path)
+dir.create(write_figures_base_path)
 
 ###########################################################################
 ###  Load functions
 ###########################################################################
 ### Load these functions for all code
-require(colorout)
+#require(colorout)
 require(assertthat)
 
 ### Load these functions for this unique project
@@ -62,17 +69,12 @@ require(data.table)
 require(fitdistrplus)
 
 ### Load project specific functions
-source(file.path(function_path,"gof_calcs.R"))
-source(file.path(function_path,"null_model.R"))
-source(file.path(function_path,"perc_fit.R"))
+file.sources = list.files(function_path, pattern="*.R", recursive=TRUE)
+sapply(file.path(function_path, file.sources),source)
 
 ### Load global functions
-source(file.path(global_path,"theme_classic_correct.R"))
-source(file.path(global_path,"unit_conversions.R"))
-source(file.path(global_path,"usgs_month_dl.R"))
-source(file.path(global_path,"usgs_readin.R"))
-source(file.path(global_path,"read_table_wheaders.R"))
-source(file.path(global_path,"gof_bootstrap.R"))
+file.sources = list.files(global_path, pattern="*.R", recursive=TRUE)
+sapply(file.path(global_path, file.sources),source)
 
 ###########################################################################
 ## Set Initial Values
@@ -98,6 +100,16 @@ for (n in seq(1,length(site_id_list))) {
 site_id <- site_id_list[n]
 site_name <- site_name_list[n]
 recons_file_name <- recons_file_name_list[n]
+
+### Create output folders
+dir.create(file.path(write_output_base_path, site_id))
+dir.create(file.path(write_figures_base_path, site_id))
+dir.create(file.path(write_figures_base_path, paste0(site_id, "/pdf")))
+dir.create(file.path(write_figures_base_path, paste0(site_id, "/svg")))
+dir.create(file.path(write_figures_base_path, paste0(site_id, "/png")))
+
+write_figures_path <- file.path(write_figures_base_path, site_id)
+write_output_path <- file.path(write_output_base_path, site_id)
 
 ###########################################################################
 ###  Read in Data
@@ -132,7 +144,7 @@ for (j in 1:12) {
 	
 	### Run the distribution fit
 	plot_name <- paste0("month_",j)
-	month_fit <- perc_fit(flows=month_flows, distr=monthly_distr, plot_name=plot_name)
+	month_fit <- perc_fit(flows=month_flows, distr=monthly_distr, plot_name=plot_name, write_folder=write_figures_path)
 	
 	if (j ==1) {
 		fit_param <- month_fit
@@ -154,8 +166,8 @@ year_test <- flow_recon$age_AD >= ref_period[1] & flow_recon$age_AD <= ref_perio
 
 ### Process observed annual flows
 annual_flows <- flow_recon$flow.obs.m3s[year_test]
-annual_fit <- perc_fit(flows=annual_flows, distr=annual_distr, plot_name="observ_annual")
-
+annual_fit <- perc_fit(flows=annual_flows, distr=annual_distr, plot_name="observ_annual", write_folder=write_figures_path)
+	
 
 ### Process reconstructed flows
 if (site_id == "10109001") {
@@ -167,7 +179,7 @@ plot_name <- paste0("annual_",gsub("\\.", "_", col_name))
 ### Create a vector with annual flows from column col_name within reference years
 annual_flows <- flow_recon[,c(col_name)][year_test]
 ### Perform fit on annual flows
-annual_fit <- rbind(annual_fit, perc_fit(flows=annual_flows, distr=annual_distr, plot_name=plot_name))
+annual_fit <- rbind(annual_fit, perc_fit(flows=annual_flows, distr=annual_distr, plot_name=plot_name, write_folder=write_figures_path))
 
 ### create column name and row name for analyis and results
 col_name <- "flow.rec.region.m3s"
@@ -175,7 +187,7 @@ plot_name <- paste0("annual_",gsub("\\.", "_", col_name))
 ### Create a vector with annual flows from column col_name within reference years
 annual_flows <- flow_recon[,c(col_name)][year_test]
 ### Perform fit on annual flows
-annual_fit <- rbind(annual_fit, perc_fit(flows=annual_flows, distr=annual_distr, plot_name=plot_name))
+annual_fit <- rbind(annual_fit, perc_fit(flows=annual_flows, distr=annual_distr, plot_name=plot_name, write_folder=write_figures_path))
 
 
 } else {
@@ -186,7 +198,7 @@ plot_name <- paste0("annual_",gsub("\\.", "_", col_name))
 ### Create a vector with annual flows from column col_name within reference years
 annual_flows <- flow_recon[,c(col_name)][year_test]
 ### Perform fit on annual flows
-annual_fit <- rbind(annual_fit, perc_fit(flows=annual_flows, distr=annual_distr, plot_name=plot_name))
+annual_fit <- rbind(annual_fit, perc_fit(flows=annual_flows, distr=annual_distr, plot_name=plot_name, write_folder=write_figures_path))
 }
 
 

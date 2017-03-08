@@ -16,7 +16,7 @@
 # |                years and scaling flows to match the annual reconstruction. 
 # *------------------------------------------------------------------
 
-perc_fit <- function(flows, distr, plot_name) {
+perc_fit <- function(flows, distr, plot_name, write_folder) {
 	require(fitdistrplus)
 	
 	### extract the non NA values
@@ -25,9 +25,16 @@ perc_fit <- function(flows, distr, plot_name) {
 	####################################################
 	### Plot and save a Cullen-Fry diagram for flows
 	####################################################
-	pdf(file.path(write_figures_path, paste0(site_id,"_cullenfrey_",plot_name,".pdf")), width=6, height=6) 
 	descdist(flows, boot=500)
-	dev.off()
+	
+	#### Save to both pdf and png
+	pdf_location <- file.path(write_folder, paste0("pdf/",site_id,"_cullenfrey_",plot_name,".pdf"))
+	d_pdf = dev.copy(pdf,pdf_location,width=6, height=6)
+    dev.off(d_pdf)
+	
+	png_location <- file.path(write_folder, paste0("png/",site_id,"_cullenfrey_",plot_name,".png"))
+	d_png = dev.copy(png,png_location,width=6, height=6,units="in",res=600)
+    dev.off(d_png)
 	
 	####################################################
 	### Fit the distribution to flows
@@ -47,10 +54,17 @@ perc_fit <- function(flows, distr, plot_name) {
 	### If the fit runs, collect results and goodness of fit statistics
 	if (class(flow_fit)!= "try-error") {
 		
-		### Plot the fit diagnostics
-		pdf(file.path(write_figures_path, paste0(site_id,"_fitdiagnost_", distr,"_",plot_name,".pdf")), width=6, height=6) 
 		plot(flow_fit)
-		dev.off()
+				
+		### Plot the fit diagnostics to both pdf and png
+		pdf_location <- file.path(write_folder, paste0("pdf/",site_id,"_fitdiagnost_", distr,"_",plot_name,".pdf"))
+		d_pdf = dev.copy(pdf,pdf_location,width=6, height=6)
+    	dev.off(d_pdf)
+	
+		png_location <- file.path(write_folder, paste0("png/",site_id,"_fitdiagnost_", distr,"_",plot_name,".png"))
+		d_png = dev.copy(png,png_location,width=6, height=6,units="in",res=600)
+    	dev.off(d_png)
+	
 	
 		### Create a dataframe with results
 		fit_param <- data.frame(data=plot_name,t(as.matrix(flow_fit$estimate)))
