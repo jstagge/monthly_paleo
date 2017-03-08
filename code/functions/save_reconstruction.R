@@ -18,7 +18,7 @@
 # *------------------------------------------------------------------
 
 
-save_reconstruction <- function(month_ts, site_id, site_name, output_name, data_name, method) {
+save_reconstruction <- function(month_ts, site_id, site_name, output_name, data_name, method, write_folder) {
 
 	### Calculate dates	
 	year_list <- usgs_wateryear_inverse(water_year=month_ts$water_year, month=month_ts$month)
@@ -34,7 +34,7 @@ save_reconstruction <- function(month_ts, site_id, site_name, output_name, data_
 	
 	
 	### Write result to CSV file
-	write_location <- file.path(write_output_path, paste0(site_id,"_",output_name, "_month_ts_",data_name,".csv"))
+	write_location <- file.path(write_folder, paste0(site_id,"_",output_name, "_reconst_ts_",data_name,".csv"))
 	write.csv(month_ts_results, file = write_location,row.names=FALSE)
 
 }

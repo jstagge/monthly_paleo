@@ -17,7 +17,7 @@
 # |  3: 
 # |*------------------------------------------------------------------
 # | DATA USED:               
-# | This is a test instance using reconstructed climate indices ENSO and PDO
+# | 
 # |
 # |*------------------------------------------------------------------
 # | CONTENTS:               
@@ -53,7 +53,7 @@ write_output_path <- file.path(output_path,output_name)
 ###  Load functions
 ###########################################################################
 ### Load these functions for all code
-require(colorout)
+#require(colorout)
 require(assertthat)
 
 ### Load these functions for this unique project

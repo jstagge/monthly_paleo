@@ -1,6 +1,6 @@
 # *------------------------------------------------------------------
-# | FUNCTION NAME: null_model
-# | FILE NAME: null_model.R
+# | FUNCTION NAME: mf_model
+# | FILE NAME: mf_model.R
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *------------------------------------------------------------------
@@ -8,15 +8,15 @@
 # |     In:        annual_rec - a dataframe with columns "water_year" and "annual_flow"
 # |                monthly_prop - a datamframe with columns "month" and "prop"
 # |                first_month_wy - a numeric variable with the month that signifies the start of the water year, usually 10
-# |     Out:       monthly_ts - a dataframe with results of the null model reconstruction
+# |     Out:       monthly_ts - a dataframe with results of the mf model reconstruction
 # | 
-# |     Desc:      This function applies the "null model", creating a monthly
+# |     Desc:      This function applies the "mf model", creating a monthly
 # |                flow reconstruction for an initial annual flow time series.
-# |                The Null Model works by applying the same seasonal proportion to all
+# |                The mf Model works by applying the same seasonal proportion to all
 # |                years and scaling flows to match the annual reconstruction. 
 # *------------------------------------------------------------------
 
-null_model <- function(annual_rec, monthly_prop, first_month_wy) {
+mf_model <- function(annual_rec, monthly_prop, first_month_wy) {
 	require(data.table)
 	require(assertthat)
 	

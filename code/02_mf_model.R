@@ -1,13 +1,12 @@
 # *------------------------------------------------------------------
-# | PROGRAM NAME: Data Music
-# | FILE NAME: paleo_monthly_gen_null.R
+# | PROGRAM NAME: 02_mf_model
+# | FILE NAME: 02_mf_model.R
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
-# | PURPOSE:  This is a code wrapper to generate a midicsv file from data.
-# | The resulting file can be processed into a midi file using the program csvmidi.
-# | This midi file can then be played using timidity.
-# | Check the ToRun.txt file for detailed code             
+# | PURPOSE:  This is a code wrapper to run the Monthly Fraction (MF) model.
+# | It calculates the mean monthly fraction of flow and applies it to annual
+# | flow reconstructions to calculate monthly flow. 
 # |
 # *------------------------------------------------------------------
 # | COMMENTS:               
@@ -17,7 +16,11 @@
 # |  3: 
 # |*------------------------------------------------------------------
 # | DATA USED:               
-# | This is a test instance using reconstructed climate indices ENSO and PDO
+# | USGS gauge flow data
+# | Annual reconstructions from:
+# | Allen, E.B., Rittenour, T.M., DeRose, R.J., Bekker, M.F., Kjelgren, R., Buckley, B.M., 2013. A tree-ring based reconstruction of Logan River streamflow, northern Utah. Water Resources Research 49, 8579–8588. doi:10.1002/2013WR014273.
+# |
+# | DeRose, R.J., Bekker, M.F., Wang, S.Y., Buckley, B.M., Kjelgren, R.K., Bardsley, T., Rittenour, T.M., Allen, E.B., 2015. A millennium-length reconstruction of Bear River stream flow, Utah. Journal of Hydrology 529, Part 2, 524–534. doi:10.1016/j.jhydrol.2015.01.014.
 # |
 # |*------------------------------------------------------------------
 # | CONTENTS:               
@@ -38,24 +41,25 @@ rm(list=ls())
 ## Set the Paths
 ###########################################################################
 ### Path for Data and Output	
-data_path <- "../../data"
-output_path <- "../../output"
-global_path <- "../global_func"
+data_path <- "../data"
+output_path <- "../output"
+global_path <- "./global_func"
 function_path <- "./functions"
 
-### Set global output location
-output_path <- file.path(output_path,"paleo_monthly")
+### Set specific output location
+output_name <- "mf_model"
+write_output_base_path <- file.path(file.path(output_path, "paleo_reconst"), output_name)
+write_figures_base_path <- file.path(file.path(output_path,"figures"),output_name)
 
-output_name <- "null_model"
-"paleo_monthly_gen"
-write_output_path <- file.path(file.path(output_path, "paleo_monthly_gen"), output_name)
-write_figures_path <- file.path(file.path(output_path,"figures"),output_name)
+### Create output folders
+dir.create(write_output_base_path)
+dir.create(write_figures_base_path)
 
 ###########################################################################
 ###  Load functions
 ###########################################################################
 ### Load these functions for all code
-require(colorout)
+#require(colorout)
 require(assertthat)
 
 ### Load these functions for this unique project
@@ -87,9 +91,20 @@ param_cd <- "00060"
 ###########################################################################
 for (n in seq(1,length(site_id_list))) {
 
+### Read site information
 site_id <- site_id_list[n]
 site_name <- site_name_list[n]
 recons_file_name <- recons_file_name_list[n]
+
+### Create output folders
+dir.create(file.path(write_output_base_path, site_id))
+dir.create(file.path(write_figures_base_path, site_id))
+dir.create(file.path(write_figures_base_path, paste0(site_id, "/pdf")))
+dir.create(file.path(write_figures_base_path, paste0(site_id, "/svg")))
+dir.create(file.path(write_figures_base_path, paste0(site_id, "/png")))
+
+write_figures_path <- file.path(write_figures_base_path, site_id)
+write_output_path <- file.path(write_output_base_path, site_id)
 
 ###########################################################################
 ###  Read in Data
@@ -140,8 +155,6 @@ null_prop <- data.frame(null_prop)
 null_prop_write_location <- file.path(write_output_path, paste0(site_id,"_",output_name,"_prop_monthly.csv"))
 write.csv(null_prop, file = null_prop_write_location,row.names=FALSE)
 
-
-
 #################################################
 ### Prepare to apply the Null Model
 #################################################
@@ -149,8 +162,6 @@ write.csv(null_prop, file = null_prop_write_location,row.names=FALSE)
 ### For all further analyses, we will use the monthly mean rather than
 ### the median.  Produces no noticeable difference.
 monthly_prop=data.frame(month=null_prop$month, prop=null_prop$prop_mean)
-
-
 
 ################################################
 ### Plot proportions
@@ -180,8 +191,6 @@ ggsave(paste0(file.path(write_figures_path,"svg/"), site_id, "_null_proportion.s
 ggsave(paste0(file.path(write_figures_path,"pdf/"), site_id, "_null_proportion.pdf"), p, width=6, height=4)
 
 
-
-
 #################################################
 ### Apply the Null Model to True Observed Annual Flows
 #################################################
@@ -190,11 +199,11 @@ annual_rec <- data.frame(water_year=flow_obs$water_year, annual_flow=flow_obs$an
 ### Only use one observation per year
 annual_rec <- unique(annual_rec)
 
-### Run Null Model
-month_ts <- null_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
+### Run MF Model
+month_ts <- mf_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
 
 ### Save Results
-save_reconstruction(month_ts, site_id, site_name, output_name, data_name="observ_annual", method="Null Model using True Annual Mean Flow")
+save_reconstruction(month_ts, site_id, site_name, output_name, data_name="observ_annual", method="MF Model using True Annual Mean Flow", write_folder=write_output_path)
 
 #################################################
 ### Specific Catch for the Logan reconstruction, which has 2 reconstruction models
@@ -208,10 +217,10 @@ if (site_id == "10109001") {
 	annual_rec <- data.frame(water_year=flow_recon$age_AD, annual_flow=flow_recon	$flow.rec.local.m3s)
 
 	### Run Null Model
-	month_ts <- null_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
+	month_ts <- mf_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
 
 	### Save Results
-	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec_local", method="Null Model using Local Reconstructed MAF")
+	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec_local", method="MF Model using Local Reconstructed MAF", write_folder=write_output_path)
 	
 
 	################################################
@@ -221,10 +230,10 @@ if (site_id == "10109001") {
 	annual_rec <- data.frame(water_year=flow_recon$age_AD, annual_flow=flow_recon$flow.rec.region.m3s)
 
 	### Run Null Model
-	month_ts <- null_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
+	month_ts <- mf_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
 
 	### Save Results
-	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec_region", method="Null Model using Regional Reconstructed MAF")
+	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec_region", method="MF Model using Regional Reconstructed MAF", write_folder=write_output_path)
 
 } else {
 	#################################################
@@ -234,10 +243,10 @@ if (site_id == "10109001") {
 	annual_rec <- data.frame(water_year=flow_recon$age_AD, annual_flow=flow_recon$flow.rec.m3s)
 
 	### Run Null Model
-	month_ts <- null_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
+	month_ts <- mf_model(annual_rec, monthly_prop, first_month_wy=first_month_wy)
 
 	### Save Results
-	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec", method="Null Model using Reconstructed MAF")
+	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec", method="MF Model using Reconstructed MAF", write_folder=write_output_path)
 
 }
 
