@@ -1,6 +1,6 @@
 # *------------------------------------------------------------------
-# | FUNCTION NAME: null_model_lag
-# | FILE NAME: null_model_lag.R
+# | FUNCTION NAME: apr_fit
+# | FILE NAME: apr_fit.R
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *------------------------------------------------------------------
@@ -10,13 +10,12 @@
 # |                first_month_wy - a numeric variable with the month that signifies the start of the water year, usually 10
 # |     Out:       monthly_ts - a dataframe with results of the null model reconstruction
 # | 
-# |     Desc:      This function applies the "null model", creating a monthly
-# |                flow reconstruction for an initial annual flow time series.
-# |                The Null Model works by applying the same seasonal proportion to all
-# |                years and scaling flows to match the annual reconstruction. 
+# |     Desc:      This function applies the APR model using elastic nets and a
+# | 				parallel analysis to find best predictors, following Stagge et al.
+# |
 # *------------------------------------------------------------------
 
-perc_fit_lag <- function(data, monthly_param, annual_param, data_name) {
+apr_fit <- function(data, monthly_param, annual_param, data_name) {
 	require(assertthat)
 	require(glmnet)
 	require(caret)
