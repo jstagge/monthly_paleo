@@ -1,6 +1,6 @@
 # *------------------------------------------------------------------
-# | FUNCTION NAME: null_model
-# | FILE NAME: null_model.R
+# | FUNCTION NAME: ap_model_rec
+# | FILE NAME: ap_model_rec.R
 # | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *------------------------------------------------------------------
@@ -10,13 +10,13 @@
 # |                first_month_wy - a numeric variable with the month that signifies the start of the water year, usually 10
 # |     Out:       monthly_ts - a dataframe with results of the null model reconstruction
 # | 
-# |     Desc:      This function applies the "null model", creating a monthly
+# |     Desc:      This function applies the "AP model", creating a monthly
 # |                flow reconstruction for an initial annual flow time series.
-# |                The Null Model works by applying the same seasonal proportion to all
-# |                years and scaling flows to match the annual reconstruction. 
+# |                The AP Model works by assuming the reconstructed mean annual flow
+# |                percentile is equivalent to the monthly percentile for the entire water year. 
 # *------------------------------------------------------------------
 
-perc_model <- function(annual_rec, monthly_param, annual_param, first_month_wy, data_name) {
+ap_model_rec <- function(annual_rec, monthly_param, annual_param, first_month_wy, data_name) {
 	require(assertthat)
 	
 	################################################

@@ -157,7 +157,7 @@ annual_data <- unique(annual_data)
 
 ### Run Percentile Model
 data_name <- "observ_annual"
-month_ts <- perc_model(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
+month_ts <- ap_model_rec(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
 
 ### Save Results
 save_reconstruction(month_ts, site_id, site_name, output_name, data_name="observ_annual", method="AP Model using True Annual Mean Flow", write_folder=write_output_path)
@@ -178,7 +178,7 @@ if (site_id == "10109001") {
 
 	### Run Percentile Model
 	data_name <- "annual_flow_rec_local_m3s"
-	month_ts <- perc_model(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
+	month_ts <- ap_model_rec(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
 
 	### Save Results
 	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec_local", method="AP Model using Local Reconstructed MAF", write_folder=write_output_path)
@@ -193,7 +193,7 @@ if (site_id == "10109001") {
 
 	### Run Percentile Model
 	data_name <- "annual_flow_rec_region_m3s"
-	month_ts <- perc_model(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
+	month_ts <- ap_model_rec(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
 
 	### Save Results
 	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec_region", method="AP Model using Regional Reconstructed MAF", write_folder=write_output_path)
@@ -210,7 +210,7 @@ if (site_id == "10109001") {
 
 	### Run Percentile Model
 	data_name <- "annual_flow_rec_m3s"
-	month_ts <- perc_model(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
+	month_ts <- ap_model_rec(annual_rec=annual_data, monthly_param, annual_param,  		first_month_wy=first_month_wy, data_name=data_name)
 
 	### Save Results
 	save_reconstruction(month_ts, site_id, site_name, output_name, data_name="rec", method="AP Model using Reconstructed MAF", write_folder=write_output_path)
