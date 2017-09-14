@@ -16,42 +16,38 @@
 ts_plot <- function(data, write_folder, write_file) {
 require(ggplot2)
 require(svglite)
+require(reshape2)
 
 ### Extract the method name
-method_name <- as.character(data$method[[1]])
+#method_name <- as.character(data$method[[1]])
 
 ### Melt to get into proper format
-plot_data <- melt(data,  id.vars="date", measure.vars=c("flow_rec_m3s", "monthly_mean", "annual_mean"))
+plot_data <- melt(data,  id.vars="date", measure.vars=c("flow_est", "flow_obs", "flow_annual"))
 
 ### Fix column names and convert method to characters
-colnames(plot_data) <- c("Date", "Method", "Flow")
-plot_data$Method <- as.character(plot_data$Method)
-plot_data$Method[plot_data$Method == "flow_rec_m3s"] <- method_name
-obs_name <- "Observed      "
-plot_data$Method[plot_data$Method == "monthly_mean"] <- obs_name
-recon_name <- "Annual Reconstruction"
-plot_data$Method[plot_data$Method == "annual_mean"] <- recon_name
-### Factor to make sure in correct order
-plot_data$Method <- factor(plot_data$Method, levels = c(obs_name, method_name, recon_name))
+colnames(plot_data) <- c("Date", "Measure", "Flow")
+plot_data$Measure <- as.character(plot_data$Measure)
 
-###### Could go back and add the annual values and reconstructions
+### Factor to make sure in correct order
+#plot_data$Measure <- factor(plot_data$Measure, levels = c( recon_name, obs_name, annual_name))
+plot_data$Measure <- factor(plot_data$Measure, levels = c("flow_obs", "flow_annual", "flow_est"), labels = c("Observed      ", "Annual Reconstruction", "Monthly Reconstruction"))
 
 ### Create plot with observed in black and predicted in red
-p <- ggplot(plot_data, aes(x=Date, y=Flow, group=Method, colour=Method, linetype=Method))
+p <- ggplot(plot_data, aes(x=Date, y=Flow, group=Measure, colour=Measure, linetype=Measure))
 p <- p + geom_line(size=0.25)
-p <- p + theme_classic_correct()
-p <- p + scale_x_date(name="Date", breaks=seq(as.Date("1800-01-01"), as.Date("2030-01-01"), by="5 years"), date_labels = "%Y")
-p <- p + scale_colour_manual(name= NULL, values = c("black", "red", "blue"))
-p <- p + scale_linetype_manual(values=c("solid", "solid", "longdash"), guide=FALSE)
+p <- p + theme_classic_new()
+p <- p + scale_x_date(name="Date", breaks=seq(as.Date("200-01-01"), as.Date("2030-01-01"), by="5 years"), date_labels = "%Y")
+p <- p + scale_colour_manual(name= NULL, values = c("black", "blue", "red"))
+p <- p + scale_linetype_manual(values=c("solid", "longdash", "solid"), guide=FALSE)
 #p <- p + scale_y_continuous(name="Discharge (m3/s)")
 p <- p + scale_y_continuous(name=expression(bold(paste("Monthly Mean Discharge  ( ",m^3,"/s )"))))
 p <- p +  theme(legend.position="bottom")
 
 
 ### Save full plot
-ggsave(paste0(file.path(write_folder,"ts_full/png/"), write_file, "_full.png"), p, width=8, height=4, dpi=600)
-ggsave(paste0(file.path(write_folder,"ts_full/pdf/"), write_file, "_full.pdf"), p, width=8, height=4)
-ggsave(paste0(file.path(write_folder,"ts_full/svg/"), write_file, "_full.svg"), p, width=8, height=4)
+ggsave(paste0(file.path(write_folder,"png/"), write_file, "_full.png"), p, width=8, height=4, dpi=600)
+ggsave(paste0(file.path(write_folder,"pdf/"), write_file, "_full.pdf"), p, width=8, height=4)
+ggsave(paste0(file.path(write_folder,"svg/"), write_file, "_full.svg"), p, width=8, height=4)
 
 
 ### Loop through 15 year periods and save
@@ -68,9 +64,9 @@ suppressMessages(p_break <- p_break + scale_x_date(name="Date", breaks=seq(as.Da
 
 ### Save zoomed plots
 write_file_subset <- paste0(write_file, "_",start_break,"_",end_break)
-ggsave(paste0(file.path(write_folder,"ts_subset/png/"), write_file_subset, "_full.png"), p_break, width=6, height=4, dpi=600)
-ggsave(paste0(file.path(write_folder,"ts_subset/pdf/"), write_file_subset, "_full.pdf"), p_break, width=6, height=4)
-ggsave(paste0(file.path(write_folder,"ts_subset/svg/"), write_file_subset, "_full.svg"), p_break, width=6, height=4)
+ggsave(paste0(file.path(write_folder,"png/"), write_file_subset, "_",start_break,"_",end_break,".png"), p_break, width=6, height=4, dpi=600)
+ggsave(paste0(file.path(write_folder,"pdf/"), write_file_subset, "_",start_break,"_",end_break,".pdf"), p_break, width=6, height=4)
+ggsave(paste0(file.path(write_folder,"svg/"), write_file_subset, "_",start_break,"_",end_break,".svg"), p_break, width=6, height=4)
 
 }
 
@@ -151,9 +147,9 @@ p <- p + geom_abline(intercept = y_hor_line[k], slope = 0, colour="grey60", size
 p <- p + geom_line(size=0.4)
 #p <- p + scale_colour_brewer(name=param_names$color, type="qual", palette = "Set1")
 #p <- p + scale_colour_ptol(name=param_names$color)
-p <- p + scale_colour_manual(name=param_names$color, values=iwanthue_4_fav)
+p <- p + scale_colour_manual(name=param_names$color, values=cb_pal(pal="wong", n=3, sort=FALSE))
 p <- p + scale_linetype_manual(name = param_names$linetype, values=c("longdash", "dashed", "twodash", "F1"))
-p <- p + theme_classic_correct()
+p <- p + theme_classic_new()
 p <- p + scale_x_discrete(name=param_names$x)
 p <- p + scale_y_continuous(name=param_names$y)
 p <- p + theme(legend.position="bottom", legend.box = "horizontal")
@@ -183,7 +179,7 @@ return(p)
 # |					using ggplot's geom_line. 
 # *------------------------------------------------------------------
 
-gof_month_plot2 <- function(data, param_list, param_names, y_hor_line=NULL) {
+gof_month_plot2 <- function(data, param_list, param_names, y_hor_line=NULL, colors=NULL) {
 require(ggplot2)
 require(ggthemes)
 
@@ -194,16 +190,17 @@ for (k in seq(1,length(y_hor_line))) {
 p <- p + geom_abline(intercept = y_hor_line[k], slope = 0, colour="grey60", size=0.25)
 }}
 p <- p + geom_line(size=0.4)
-p <- p + scale_colour_brewer(name=param_names$color, type="qual", palette = "Set1")
+#p <- p + scale_colour_brewer(name=param_names$color, type="qual", palette = "Set1")
 #p <- p + scale_colour_ptol(name=param_names$color)
 #p <- p + scale_colour_manual(name=param_names$color, values=iwanthue_5)
-p <- p + theme_classic_correct()
+p <- p + scale_colour_manual(name=param_names$color, values=colors)
+p <- p + theme_classic_new()
 p <- p + scale_x_discrete(name=param_names$x)
 p <- p + scale_y_continuous(name=param_names$y)
 p <- p + theme(legend.position="bottom", legend.box = "horizontal")
 
-p <- p + guides(colour = guide_legend(label.position = "bottom", title.position="top", label.hjust=0, title.hjust=0.5, keywidth=4, byrow=TRUE))
-p <- p + guides(linetype = guide_legend(label.position = "bottom", title.position="top", label.hjust=0, title.hjust=0.5, keywidth=4))
+p <- p + guides(colour = guide_legend(label.position = "bottom", title.position="top", label.hjust=0.5, title.hjust=0.5, keywidth=4, byrow=TRUE))
+p <- p + guides(linetype = guide_legend(label.position = "bottom", title.position="top", label.hjust=0.5, title.hjust=0.5, keywidth=4))
 
 return(p)
 }
@@ -232,7 +229,7 @@ require(reshape2)
 require(ggthemes)
 
 ### Remove the intercept (first row)
-data <- data[2:dim(data)[1],]
+#data <- data[2:dim(data)[1],]
 
 ### Force the column names to be months from 1 to 12
 colnames(data) <- seq(1,12)
@@ -259,7 +256,7 @@ p <- ggplot(data, aes(x=month, y=beta, group=predictor, colour=predictor))
 p <- p + geom_abline(intercept = 0, slope = 0, colour="grey60", linetype="longdash", size=0.25)
 p <- p + geom_line(size=0.5)
 p <- p + scale_colour_few(name="Predictor")
-p <- p + theme_classic_correct()
+p <- p + theme_classic_new()
 p <- p + scale_x_discrete(name="Month")
 p <- p + scale_y_continuous(name=expression(bold(paste("Model Coefficient  ( ",beta," )"))))
 p <- p + theme(legend.position="bottom", legend.box = "horizontal")
@@ -407,7 +404,7 @@ p <- p + geom_line(size=0.4)
 p <- p + scale_colour_brewer(name=param_names$color, type="qual", palette = "Set1")
 #p <- p + scale_colour_ptol(name=param_names$color)
 #p <- p + scale_colour_manual(name=param_names$color, values=iwanthue_7)
-p <- p + theme_classic_correct()
+p <- p + theme_classic_new()
 p <- p + scale_x_discrete(name=param_names$x)
 p <- p + scale_y_continuous(name=param_names$y)
 p <- p + theme(legend.position="bottom", legend.box = "horizontal")

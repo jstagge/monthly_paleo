@@ -109,7 +109,7 @@ p2 <- ggplot(Plot.df, aes(x=Obs, y=Pred))
 p2 <- p2 + geom_abline(intercept = 0, slope = 1, colour="red")
 p2 <- p2 + geom_point(colour="grey20")
 p2 <- p2 + theme_classic_correct()
-p2 <- p2 + scale_x_continuous(name=expression(bold(paste("Predicted ( ",m^3,"/s )"))))
+p2 <- p2 + scale_y_continuous(name=expression(bold(paste("Predicted ( ",m^3,"/s )"))))
 p2 <- p2 + scale_x_continuous(name=expression(bold(paste("Observed ( ",m^3,"/s )"))))
 
 return(list(fitplot=p2, residplot=p1, limits=limit.df, gof=gof.df))
@@ -150,41 +150,53 @@ resid_plot <- gof.plots(x.obs=x.obs, x.pred=x.pred, x.factor=x.factor)
 p1 <- resid_plot$residplot + geom_blank(data=resid_plot$limits)
 
 ### Save plot of residuals
-ggsave(paste0(file.path(write_folder,"resid_full/png/"), write_file, "_resid_full.png"), p1, width=5, height=4, dpi=600)
-ggsave(paste0(file.path(write_folder,"resid_full/pdf/"), write_file, "_resid_full.pdf"), p1, width=5, height=4)
-ggsave(paste0(file.path(write_folder,"resid_full/svg/"), write_file, "_resid_full.svg"), p1, width=5, height=4)
+output_folder <- file.path(write_folder,"resid_full/png")
+suppressWarnings(dir.create(output_folder, recursive=TRUE))
+ggsave(file.path(output_folder, paste0(write_file,"_resid_full.png")), p1, width=5, height=4, dpi=600)
+output_folder <- file.path(write_folder,"resid_full/pdf")
+suppressWarnings(dir.create(output_folder, recursive=TRUE))
+ggsave(file.path(output_folder, paste0(write_file,"_resid_full.pdf")), p1, width=5, height=4)
+output_folder <- file.path(write_folder,"resid_full/svg")
+suppressWarnings(dir.create(output_folder, recursive=TRUE))
+ggsave(file.path(output_folder, paste0(write_file,"_resid_full.svg")), p1, width=5, height=4)
 
 ### Convert to monthly facets
 p1 <- p1 + facet_wrap(~ Factor, ncol=4, scales="free")
 
 ### Save plot of monthly residuals
-ggsave(paste0(file.path(write_folder,"resid_monthly/png/"), write_file, "_resid_monthly.png"), p1, width=8, height=6, dpi=600)
-ggsave(paste0(file.path(write_folder,"resid_monthly/pdf/"), write_file, "_resid_monthly.pdf"), p1, width=8, height=6)
-ggsave(paste0(file.path(write_folder,"resid_monthly/svg/"), write_file, "_resid_monthly.svg"), p1, width=8, height=6)
-
+output_folder <- file.path(write_folder,"resid_monthly/png")
+suppressWarnings(dir.create(output_folder, recursive=TRUE))
+ggsave(file.path(output_folder, paste0(write_file,"_resid_monthly.png")), p1, width=8, height=6, dpi=600)
+output_folder <- file.path(write_folder,"resid_monthly/pdf")
+suppressWarnings(dir.create(output_folder, recursive=TRUE))
+ggsave(file.path(output_folder, paste0(write_file,"_resid_monthly.pdf")), p1, width=8, height=6)
+output_folder <- file.path(write_folder,"resid_monthly/svg")
+suppressWarnings(dir.create(output_folder, recursive=TRUE))
+ggsave(file.path(output_folder, paste0(write_file,"_resid_monthly.svg")), p1, width=8, height=6)
 
 ### Extract plot of residuals
 p2 <- resid_plot$fitplot + geom_blank(data=resid_plot$limits)
 
 ### Save plot of residuals
-ggsave(paste0(file.path(write_folder,"resid_full/png/"), write_file, "_fit_full.png"), p2, width=5, height=4, dpi=600)
-ggsave(paste0(file.path(write_folder,"resid_full/pdf/"), write_file, "_fit_full.pdf"), p2, width=5, height=4)
-ggsave(paste0(file.path(write_folder,"resid_full/svg/"), write_file, "_fit_full.svg"), p2, width=5, height=4)
+output_folder <- file.path(write_folder,"resid_full/png")
+ggsave(file.path(output_folder, paste0(write_file,"_fit_full.png")), p2, width=5, height=4, dpi=600)
+output_folder <- file.path(write_folder,"resid_full/pdf")
+ggsave(file.path(output_folder, paste0(write_file,"_fit_full.pdf")), p2, width=5, height=4)
+output_folder <- file.path(write_folder,"resid_full/svg")
+ggsave(file.path(output_folder, paste0(write_file,"_fit_full.svg")), p2, width=5, height=4)
 
 ### Convert to monthly facets
 p2 <- p2 + facet_wrap(~ Factor, ncol=4, scales="free")
 
 ### Save plot of monthly residuals
-ggsave(paste0(file.path(write_folder,"resid_monthly/png/"), write_file, "_fit_monthly.png"), p2, width=8, height=6, dpi=600)
-ggsave(paste0(file.path(write_folder,"resid_monthly/pdf/"), write_file, "_fit_monthly.pdf"), p2, width=8, height=6)
-ggsave(paste0(file.path(write_folder,"resid_monthly/svg/"), write_file, "_fit_monthly.svg"), p2, width=8, height=6)
+output_folder <- file.path(write_folder,"resid_monthly/png")
+ggsave(file.path(output_folder, paste0(write_file,"_fit_monthly.png")), p2, width=8, height=6, dpi=600)
+output_folder <- file.path(write_folder,"resid_monthly/pdf")
+ggsave(file.path(output_folder, paste0(write_file,"_fit_monthly.pdf")), p2, width=8, height=6)
+output_folder <- file.path(write_folder,"resid_monthly/svg")
+ggsave(file.path(output_folder, paste0(write_file,"_fit_monthly.svg")), p2, width=8, height=6)
 
-
-### Save to csv
-write_location <- file.path(write_output_path, paste0(write_file,"_month_gof.csv"))
-write.csv(resid_plot$gof, file = write_location, row.names=TRUE)
-
-return(resid_plot)
+return(resid_plot$gof)
 }
 
 

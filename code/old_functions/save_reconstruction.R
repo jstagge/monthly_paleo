@@ -21,8 +21,10 @@
 save_reconstruction <- function(month_ts, site_id, site_name, output_name, data_name, method, write_folder) {
 
 	### Calculate dates	
-	year_list <- usgs_wateryear_inverse(water_year=month_ts$water_year, month=month_ts$month)
-	date_list = mid_month(year_list, month_ts$month)
+	#year_list <- usgs_wateryear_inverse(water_year=month_ts$water_year, month=month_ts$month)
+	date_list = mid_month(month_ts$year, month_ts$month)
+	year_list <- month_ts$year
+	water_year_list <- usgs_wateryear(year=month_ts$year, month=month_ts$month, first_month=10)
 	
 	### Determine second to last column name (will differ using null or perc models)
 	penult_col <- tail(names(month_ts), 2)[[1]]
@@ -30,7 +32,7 @@ save_reconstruction <- function(month_ts, site_id, site_name, output_name, data_
 	colnames(penult_vals) <- penult_col
 	
 	### Reorganize data before saving
-	month_ts_results <- data.frame(site_id = site_id, site_name=site_name, water_year = month_ts$water_year, year=year_list,  month = month_ts$month, date = date_list, penult_vals, flow_rec_m3s=month_ts$flow_rec_m3s, method=method)
+	month_ts_results <- data.frame(site_id = site_id, site_name=site_name, water_year = water_year_list, year=year_list,  month = month_ts$month, date = date_list, penult_vals, rec_perc=month_ts$perc, flow_rec_m3s=month_ts$flow, method=method)
 	
 	
 	### Write result to CSV file
