@@ -32,14 +32,10 @@ Code is numbered in order of operations.  If you would like to simply recreate t
 Rscript 00_prepare_file_system.R
 Rscript 01_process_streamflows.R
 Rscript 02_mf_model.R
-Rscript 03_ap_model_fit.R
-Rscript 04_ap_model_reconstruct.R
-Rscript 05_apr_model_fit.R
-Rscript 06_apr_model_reconstruct.R
-Rscript 07_pca_tree_ring.R
-Rscript 08_apr_model_predictors_fit.R
-Rscript 09_apr_model_predictors_reconstruct.R
-Rscript 10_plot_gof_results.R
+Rscript 03_pca_tree_ring.R
+Rscript 04_ap_apr_model.R
+Rscript 05_plot_ap_apr_model.R
+Rscript 06_gof.R
 ```
 
 ### Running scripts step-by-step
@@ -52,23 +48,24 @@ The next script downloads and processes USGS streamflow for the relevant sites. 
 ```
 Rscript 01_process_streamflows.R
 ```
-The following scripts each fit a model described in [Stagge et al. (2017)](http://) and then reconstruct flow. For all models, except the MF model, these steps are separated into "_fitting" and "_reconstruct" files.
+The following script fits the Monthly Fraction (MF) model described in [Stagge et al. (2017)](http://) and then reconstructs flow.
 ```
 Rscript 02_mf_model.R
-Rscript 03_ap_model_fit.R
-Rscript 04_ap_model_reconstruct.R
-Rscript 05_apr_model_fit.R
-Rscript 06_apr_model_reconstruct.R
 ```
-The following files run a PCA analysis on regional tree-ring chronologies and then use these, along with global circulation indices as predictors. File naming follows the same sceme:
+The following file runs a PCA analysis on regional tree-ring chronologies to be used as a predictor in the APR model.
 ```
-Rscript 07_pca_tree_ring.R
-Rscript 08_apr_model_predictors_fit.R
-Rscript 09_apr_model_predictors_reconstruct.R
+Rscript 03_pca_tree_ring.R
 ```
+
+These two scripts first fit and reconstruct flows using the Annual Percentile (AP) and Annual Percentile with Regression (APR) models, followed by code to plot the resulting model regression coefficients.
+```
+Rscript 04_ap_apr_model.R
+Rscript 05_plot_ap_apr_model.R
+```
+
 Finally, a series of goodness of fit tests are run, in addition to several plots used to validate the model results:
 ```
-Rscript 10_plot_gof_results.R
+Rscript 06_gof.R
 ```
 
 ## Reference and How to Cite
@@ -79,7 +76,7 @@ For any description of this methodology, please use the following citation:
 
 For any use of this code, please cite the above paper and the following:
 
-* I will apply to zenodo to get a DOI for this.
+
 
 ## Authors
 
