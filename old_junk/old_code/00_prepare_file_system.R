@@ -1,13 +1,29 @@
 # *------------------------------------------------------------------
 # | PROGRAM NAME: prepare_file_system
 # | FILE NAME: 00_prepare_file_system.R
-# | DATE: 09/15/2017
+# | DATE: 
 # | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
 # | PURPOSE:  This script will install any packages needed for the subsequent
-# |				code and create the output folder structure to hold results.     
+# |				code and will create the output folder structure to hold results.     
 # |
 # *------------------------------------------------------------------
+# | COMMENTS:               
+# |
+# |  1:  
+# |  2:  
+# |  3: 
+# |*------------------------------------------------------------------
+# | DATA USED:               
+# | 
+# |
+# |*------------------------------------------------------------------
+# | CONTENTS:               
+# |
+# |  PART 1:  
+# |  PART 2: 
+# |  PART 3: 
+# *-----------------------------------------------------------------
 # | UPDATES:               
 # |
 # |
@@ -54,6 +70,7 @@ dir.create(output_path)
 
 ### Create subfolders
 dir.create(file.path(output_path, "figures"))
+dir.create(file.path(output_path, "gof"))
 dir.create(file.path(output_path, "observed_utah_flow"))
 dir.create(file.path(output_path, "pca_chronol"))
 dir.create(file.path(output_path, "paleo_reconst"))

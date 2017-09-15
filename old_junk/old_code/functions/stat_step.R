@@ -33,7 +33,6 @@ stairstepn <- function( data, direction="hv", yvars="y" ) {
 
 
 stat_stepribbon <- 
-	require(ggplot2)
   function(mapping = NULL, data = NULL, geom = "ribbon", position = "identity", inherit.aes = TRUE) {
     ggplot2::layer(
       stat = Stepribbon, mapping = mapping, data = data, geom = geom, 

@@ -1,32 +1,39 @@
 # *------------------------------------------------------------------
-# | PROGRAM NAME: ap_apr_model
-# | FILE NAME: 04_ap_apr_model.R
-# | DATE: 09/15/2017
-# | CREATED BY:  James Stagge         
+# | PROGRAM NAME: 05_apr_model_fit
+# | FILE NAME: 05_apr_model_fit.R
+# | DATE: 
+# | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
-# | PURPOSE:  This script runs the Annual Percentile (AP) and Annual Percentile
-# |				with Regression (APR) Models for the Bear and Logan Rivers.
-# |				The method is detailed in Stagge et al. (2017), which is included as a reference.     
-# |				 
+# | PURPOSE:  This is a code wrapper to fit the Annual Percentile with
+# | regression (APR) model. It fits a regression equation, explaining
+# | monthly percentile by lagged (-1,0,+1) annual percentile. 
+# |
+# |
 # *------------------------------------------------------------------
+# | COMMENTS:               
+# |
+# |  1:  
+# |  2: 
+# |  3: 
+# |*------------------------------------------------------------------
 # | DATA USED:               
 # | USGS gauge flow data
 # | Annual reconstructions from:
 # | Allen, E.B., Rittenour, T.M., DeRose, R.J., Bekker, M.F., Kjelgren, R., Buckley, B.M., 2013. A tree-ring based reconstruction of Logan River streamflow, northern Utah. Water Resources Research 49, 8579–8588. doi:10.1002/2013WR014273.
 # |
 # | DeRose, R.J., Bekker, M.F., Wang, S.Y., Buckley, B.M., Kjelgren, R.K., Bardsley, T., Rittenour, T.M., Allen, E.B., 2015. A millennium-length reconstruction of Bear River stream flow, Utah. Journal of Hydrology 529, Part 2, 524–534. doi:10.1016/j.jhydrol.2015.01.014.
-# | 
-# | Tree-ring chronology PCs calculated from 03_pca_tree_ring.R
-# | ENSO reconstructions 
+# |
+# |*------------------------------------------------------------------
+# | CONTENTS:               
+# |
+# |  PART 1:  
+# |  PART 2: 
+# |  PART 3: 
+# *-----------------------------------------------------------------
+# | UPDATES:               
+# |
 # |
 # *------------------------------------------------------------------
-# | COMMENTS:               
-# |
-# |  1:  
-# |  2:  
-# |  3: 
-# *------------------------------------------------------------------
-
 
 ### Clear any existing data or functions.
 rm(list=ls())

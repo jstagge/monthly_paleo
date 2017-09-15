@@ -1,24 +1,36 @@
 # *------------------------------------------------------------------
-# | PROGRAM NAME: pca_tree_ring
-# | FILE NAME: 03_pca_tree_ring.R
-# | DATE: 09/15/2017
-# | CREATED BY:  James Stagge         
+# | PROGRAM NAME: Data Music
+# | FILE NAME: paleo_monthly_gen_null.R
+# | DATE: 
+# | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
-# | PURPOSE:  This script runs a PCA analysis for regional tree-ring chronologies
-# |				to be used as additional predictors in the APR model.   
-# |				
-# *------------------------------------------------------------------
-# | DATA USED:               
-# | WADR database of tree-ring chronologies, provided by Justin DeRose.
+# | PURPOSE:  This is a code wrapper to generate a midicsv file from data.
+# | The resulting file can be processed into a midi file using the program csvmidi.
+# | This midi file can then be played using timidity.
+# | Check the ToRun.txt file for detailed code             
 # |
 # *------------------------------------------------------------------
 # | COMMENTS:               
 # |
 # |  1:  
-# |  2:  
+# |  2: 
 # |  3: 
+# |*------------------------------------------------------------------
+# | DATA USED:               
+# | This is a test instance using reconstructed climate indices ENSO and PDO
+# |
+# |*------------------------------------------------------------------
+# | CONTENTS:               
+# |
+# |  PART 1:  
+# |  PART 2: 
+# |  PART 3: 
+# *-----------------------------------------------------------------
+# | UPDATES:               
+# |
+# |
 # *------------------------------------------------------------------
-
+ 
 ### Clear any existing data or functions.
 rm(list=ls())
 
@@ -161,7 +173,7 @@ plot_df <- data.frame(year=wadr_data_std$year, chron_per_year=wadr_chron_per_yea
 p <- ggplot(subset(plot_df, chron_per_year>0), aes(x=year, ymin=0, ymax=chron_per_year))
 p <- p + geom_ribbon(colour="black", fill="grey30", alpha=0.75, stat="stepribbon")
 p <- p + geom_hline(yintercept=3.5, colour="red", linetype="longdash")
-p <- p + theme_classic_new_majgrid()
+p <- p + theme_classic_correct_majgrid()
 p <- p + coord_cartesian(xlim=c(700,2020), ylim=c(0,51), expand=FALSE)
 p <- p + scale_y_continuous("Tree Ring Chronologies") + scale_x_continuous(name="Year")
 

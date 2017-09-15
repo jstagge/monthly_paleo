@@ -1,8 +1,8 @@
 # *------------------------------------------------------------------
 # | PROGRAM NAME: process_streamflows
-# | FILE NAME: 01_process_streamflows.R
-# | DATE: 09/15/2017
-# | CREATED BY:  James Stagge         
+# | FILE NAME: process_streamflows.R
+# | DATE: 
+# | CREATED BY:  Jim Stagge         
 # *----------------------------------------------------------------
 # | PURPOSE:  This script downloads daily USGS daily flow data for the site list,
 # |				converts it to monthly mean values, and saves to the output folder      
@@ -15,9 +15,22 @@
 # |      to monthly and annual.
 # |  2:  Done to match Justin's calculations, but could consider gap filling using zoo.
 # |  3: 
+# |*------------------------------------------------------------------
+# | DATA USED:               
+# | 
+# |
+# |*------------------------------------------------------------------
+# | CONTENTS:               
+# |
+# |  PART 1:  
+# |  PART 2: 
+# |  PART 3: 
+# *-----------------------------------------------------------------
+# | UPDATES:               
+# |
+# |
 # *------------------------------------------------------------------
-
-
+ 
 ### Clear any existing data or functions.
 rm(list=ls())
 
@@ -52,6 +65,9 @@ require(staggefuncs)
 file.sources = list.files(function_path, pattern="*.R", recursive=TRUE)
 sapply(file.path(function_path, file.sources),source)
 
+### Load global functions
+file.sources = list.files(global_path, pattern="*.R", recursive=TRUE)
+sapply(file.path(global_path, file.sources),source)
 
 ###########################################################################
 ## Set Initial Values
