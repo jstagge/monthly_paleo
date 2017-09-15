@@ -347,7 +347,7 @@ k <- pc_number
 plot_data$ID <- factor(plot_data$ID, levels = plot_data$ID[order(-plot_data$Contribution)])
 plot_data$variable <- paste("PC ", k,sep="")
 ### Create column for species names
-plot_data$species_comb <- paste0(capwords(as.character(plot_data$genus)), " ", plot_data$species)
+plot_data$species_comb <- paste0(cap_first(as.character(plot_data$genus)), " ", plot_data$species)
 
 p <- ggplot(plot_data, aes(x=ID, y=Loading, fill=common_name))
 p <- p + geom_bar(stat="identity", colour="black")
@@ -357,7 +357,7 @@ p <- p + scale_fill_brewer(name="Species", palette="Set2", type="qual")
 p <- p + theme_bw(legend_pt)
 p <- p + theme(axis.title.x=element_blank())
 p <- p + scale_y_continuous(name="")#, expand = c(0,0))
-p <- p + theme(axis.text.x = element_text(angle = 25, hjust = 1))
+p <- p + theme(axis.text.x = element_text(angle = 25, size=8, hjust = 1))
 
 ### Extract legend
 p_legend <- extract_legend(p) 

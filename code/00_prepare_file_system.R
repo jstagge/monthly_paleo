@@ -37,7 +37,7 @@ rm(list=ls())
 ###  Check for necessary packages and install if needed
 ###########################################################################
 ### Set a list of packages
-list_of_packages <- c("assertthat", "zoo", "data.table", "ggplot2", "fitdistrplus", "maps", "ggmap", "gridExtra", "ggrepel", "dataRetrieval", "missMDA", "reshape2", "svglite", "lubridate", "glmnet", "caret")
+list_of_packages <- c("assertthat", "zoo", "data.table", "ggplot2", "fitdistrplus", "maps", "gridExtra", "ggrepel", "dataRetrieval", "missMDA", "reshape2", "svglite", "lubridate", "glmnet")
 
 	
 ### Determine which packages are missing
@@ -48,7 +48,10 @@ packages_needed <- list_of_packages[!installed_test]
 ### If packages are missing, install them
 if(length(packages_needed)) install.packages(packages_needed)
 
-
+### A few packages have issues in the CRAN repository, must be installed from github
+require(devtools)
+install_github("dkahle/ggmap")
+install_github("topepo/caret")
 
 ###########################################################################
 ## Set the Paths

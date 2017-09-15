@@ -81,6 +81,7 @@ require(testthat)
 #require(monthlypaleo)
 require(staggefuncs)
 require(paleoAPR)
+require(ggplot2)
 
 ### Load project specific functions
 file.sources = list.files(function_path, pattern="*.R", recursive=TRUE)

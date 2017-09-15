@@ -38,27 +38,46 @@ rm(list=ls())
 ## Set the Paths
 ###########################################################################
 ### Path for Data and Output	
-data_path <- "../../data"
-output_path <- "../../output"
-global_path <- "../global_func"
+data_path <- "../data"
+output_path <- "../output"
+global_path <- "./global_func"
 function_path <- "./functions"
 
-### Set global output location
-output_path <- file.path(output_path,"paleo_monthly")
-output_name <- "pca_chronol"
+### Create output folders
+write_output_base_path <- file.path(output_path, "pca_chronol")
+write_figures_base_path <- file.path(output_path,"figures")
 
-write_output_path <- file.path(output_path, output_name)
-write_figures_path <- file.path(file.path(output_path,"figures"),output_name)
+### Create output folders
+dir.create(write_output_base_path)
+dir.create(write_figures_base_path)
+
+#################################################
+### Create path for figures
+#################################################
+### Create folder for all figures
+write_path <- file.path(write_figures_base_path,"pca_chronol")
+dir.create(write_path, recursive=TRUE)
+
+### Create folder for Publication Figures
+pub_path <- file.path(write_figures_base_path,"publication")
+
+dir.create(file.path(pub_path,"png"), recursive=TRUE)
+dir.create(file.path(pub_path,"pdf"), recursive=TRUE)
+dir.create(file.path(pub_path,"svg"), recursive=TRUE)
 
 ###########################################################################
 ###  Load functions
 ###########################################################################
 ### Load these functions for all code
-require(colorout)
+#require(colorout)
 require(assertthat)
+require(testthat)
 
 ### Load these functions for this unique project
-require(data.table)
+#require(monthlypaleo)
+require(staggefuncs)
+require(paleoAPR)
+
 require(fitdistrplus)
 require(ggplot2)
 require("maps")
@@ -69,23 +88,8 @@ require(dataRetrieval)
 require(missMDA)
 
 ### Load project specific functions
-#source(file.path(function_path,"gof_calcs.R"))
-#source(file.path(function_path,"null_model.R"))
-#source(file.path(function_path,"perc_fit.R"))
 file.sources = list.files(function_path, pattern="*.R", recursive=TRUE)
 sapply(file.path(function_path, file.sources),source)
-
-### Load global functions
-#source(file.path(global_path,"theme_classic_correct.R"))
-#source(file.path(global_path,"unit_conversions.R"))
-#source(file.path(global_path,"usgs_month_dl.R"))
-#source(file.path(global_path,"usgs_readin.R"))
-#source(file.path(global_path,"read_table_wheaders.R"))
-#source(file.path(global_path,"gof_bootstrap.R"))
-#source(file.path(global_path,"mid_month.R"))
-#source(file.path(global_path,"usgs_wateryear.R"))
-file.sources = list.files(global_path, pattern="*.R", recursive=TRUE)
-sapply(file.path(global_path, file.sources),source)
 
 ###########################################################################
 ## Set Initial Values
@@ -152,7 +156,6 @@ map_big <- get_stamenmap(map_box, maptype="terrain", zoom = 8)
 states <- map_data("state")
 colnames(states) <- c("lon", "lat", "group", "order", "region", "subregion")
 
-
 ################################################
 ### Prepare Data for PCA
 #################################################
@@ -174,10 +177,16 @@ p <- p + theme_classic_correct_majgrid()
 p <- p + coord_cartesian(xlim=c(700,2020), ylim=c(0,51), expand=FALSE)
 p <- p + scale_y_continuous("Tree Ring Chronologies") + scale_x_continuous(name="Year")
 
-plot_name <- "Tree_chron_over_time"
-ggsave(file.path(write_figures_path, paste0(plot_name,".png")), p, width=6, height=4, dpi=600)
-ggsave(file.path(write_figures_path, paste0(plot_name,".svg")), p, width=6, height=4)
-ggsave(file.path(write_figures_path, paste0(plot_name,".pdf")), p, width=6, height=4)
+### Set up output folders
+dir.create(file.path(write_path,"png"), recursive=TRUE)
+dir.create(file.path(write_path,"pdf"), recursive=TRUE)
+dir.create(file.path(write_path,"svg"), recursive=TRUE)
+
+### Save figure
+plot_name <- "tree_chron_over_time"
+ggsave(paste0(file.path(write_path,"png/"), plot_name, ".png"), p, width=6, height=4, dpi=600)
+ggsave(paste0(file.path(write_path,"svg/"), plot_name, ".svg"), p, width=6, height=4)
+ggsave(paste0(file.path(write_path,"pdf/"), plot_name, ".pdf"), p, width=6, height=4)
 
 
 ###########################################################################
@@ -211,20 +220,20 @@ pca_600 <- pca_calc(wadr_std_600)
 pca_x_600 <- pca_reconstruct(data=wadr_std_600, pca_fit = pca_600)
 
 ### Save PC scores
-write.csv(pca_x_600,file.path(write_output_path, "PC_Score_600.csv"))
+write.csv(pca_x_600,file.path(write_output_base_path, "pc_score_600.csv"))
 
 ### Create a table showing PCA diagnostics
 scree_df <- data.frame(cbind(Component=seq(1,dim(pca_600$importance)[2]),t(pca_600$importance)))
 scree_df$EigenVal <- scree_df$Standard.deviation^2
 
 ### Cut to first 20 and save to file
-write.csv(scree_df[1:20,],file.path(write_output_path, "PCA_Var_Exp_600.csv"), row.names=FALSE)
+write.csv(scree_df[1:20,],file.path(write_output_base_path, "pca_var_exp_600.csv"), row.names=FALSE)
 
 ### Plot diagnostics for PCA 600
-pca_plot_wrapper(data=scree_df, write_folder=file.path(write_figures_path,"PCA_600"), write_file="PCA_600")
+pca_plot_wrapper(data=scree_df, write_folder=write_path, write_file="pca_600")
 
 ### Plot Loadings for PCA 600
-pca_loading_plot_wrapper(pca_loading=pca_600$loadings, pc.n=8, write_folder=file.path(write_figures_path, "PCA_600"), write_file="PCA_600")
+pca_loading_plot_wrapper(pca_loading=pca_600$loadings, pc.n=8, write_folder=write_path, write_file="pca_600" )
 
 
 ##################################################
@@ -241,21 +250,20 @@ pca_400 <- pca_calc(wadr_std_400)
 pca_x_400 <- pca_reconstruct(data=wadr_std_400, pca_fit = pca_400)
 
 ### Save PC scores
-write.csv(pca_x_400,file.path(write_output_path, "PC_Score_400.csv"))
+write.csv(pca_x_400,file.path(write_output_base_path, "pc_score_400.csv"))
 
 ### Create a table showing PCA diagnostics
 scree_df <- data.frame(cbind(Component=seq(1,dim(pca_400$importance)[2]),t(pca_400$importance)))
 scree_df$EigenVal <- scree_df$Standard.deviation^2
 
 ### Cut to first 20 and save to file
-write.csv(scree_df[1:20,],file.path(write_output_path, "PCA_Var_Exp_400.csv"), row.names=FALSE)
+write.csv(scree_df[1:20,],file.path(write_output_base_path, "pca_var_exp_400.csv"), row.names=FALSE)
 
 ### Plot diagnostics for PCA 400
-pca_plot_wrapper(data=scree_df, write_folder=file.path(write_figures_path,"PCA_400"), write_file="PCA_400")
+pca_plot_wrapper(data=scree_df, write_folder=write_path, write_file="pca_400")
 
 ### Plot Loadings for PCA 400
-pca_loading_plot_wrapper(pca_loading=pca_400$loadings, pc.n=8, write_folder=file.path(write_figures_path, "PCA_400"), write_file="PCA_400")
-
+pca_loading_plot_wrapper(pca_loading=pca_400$loadings, pc.n=8, write_folder=write_path, write_file="pca_400" )
 
 
 
@@ -279,16 +287,24 @@ p <- ggplot(subset(Plot.df, Samples>0), aes(x=Year, ymin=0, ymax=Samples))
 p <- p + geom_ribbon(colour="black", fill="grey30", alpha=0.75, stat="stepribbon")
 p <- p + geom_polygon(data=chron_time_df, aes(x=Year, y=Samples, color=Model), fill=NA, size=0.75)
 p <- p + scale_colour_brewer(name="Data Subset", type="qual", palette="Set1")
-p <- p + theme_classic_correct_majgrid()
+p <- p + theme_classic_new()
+p <- p + theme(panel.grid.major =   element_line(colour = "grey90", size = 0.2))
 p <- p + theme(legend.position="bottom")
 p <- p + coord_cartesian(xlim=c(700,2023), ylim=c(0,51), expand=FALSE)
 p <- p + scale_y_continuous("Tree Ring Chronologies") + scale_x_continuous(name="Year")
 p
-### Save results
-ggsave(file.path(write_figures_path, "Tree_chron_over_time_3_alternatives.png"), p, width=6, height=4, dpi=600)
-ggsave(file.path(write_figures_path, "Tree_chron_over_time_3_alternatives.svg"), p, width=6, height=4)
-ggsave(file.path(write_figures_path, "Tree_chron_over_time_3_alternatives.pdf"), p, width=6, height=4)
 
+### Save figure
+plot_name <- "tree_chron_over_time_3_alternatives"
+ggsave(paste0(file.path(write_path,"png/"), plot_name, ".png"), p, width=6, height=4, dpi=600)
+ggsave(paste0(file.path(write_path,"svg/"), plot_name, ".svg"), p, width=6, height=4)
+ggsave(paste0(file.path(write_path,"pdf/"), plot_name, ".pdf"), p, width=6, height=4)
+
+### Save Publication Figure 1
+plot_name <- "fig_1"
+ggsave(paste0(file.path(pub_path,"png/"), plot_name, ".png"), p, width=6, height=4, dpi=600)
+ggsave(paste0(file.path(pub_path,"svg/"), plot_name, ".svg"), p, width=6, height=4)
+ggsave(paste0(file.path(pub_path,"pdf/"), plot_name, ".pdf"), p, width=6, height=4)
 
 
 ##################################################
@@ -307,12 +323,17 @@ p <- p + geom_line()
 p <- p + geom_point()
 p <- p + scale_y_continuous("Mean Squared Error")
 p <- p + scale_x_continuous(name="Principal Component", breaks=seq(0,20,2))
-p <- p + theme_classic_correct()
+p <- p + theme_classic_new()
 p
 ### Save results
-ggsave(file.path(file.path(write_figures_path,"PCA_Impute"), "PCA_MSE_K_fold.png"), p, width=6, height=4, dpi=600)
-ggsave(file.path(file.path(write_figures_path,"PCA_Impute"), "PCA_MSE_K_fold.svg"), p, width=6, height=4)
-ggsave(file.path(file.path(write_figures_path,"PCA_Impute"), "PCA_MSE_K_fold.pdf"), p, width=6, height=4)
+dir.create(file.path(file.path(write_path,"png"), "pca_impute"), recursive=TRUE)
+dir.create(file.path(file.path(write_path,"svg"), "pca_impute"), recursive=TRUE)
+dir.create(file.path(file.path(write_path,"pdf"), "pca_impute"), recursive=TRUE)
+
+plot_name <- "pca_mse_k_fold"
+ggsave(file.path(file.path(file.path(write_path,"png"), "pca_impute"), paste0(plot_name, ".png")), p, width=6, height=4, dpi=600)
+ggsave(file.path(file.path(file.path(write_path,"svg"), "pca_impute"), paste0(plot_name, ".svg")), p, width=6, height=4)
+ggsave(file.path(file.path(file.path(write_path,"pdf"), "pca_impute"), paste0(plot_name, ".pdf")), p, width=6, height=4)
 
 
 ##################################################
@@ -323,7 +344,7 @@ wadr_std_impute <- imputePCA(wadr_std_impute,ncp=9)
 wadr_std_impute <- wadr_std_impute$completeObs
 
 ###  Save imputed values
-write.csv(wadr_std_impute,file.path(write_output_path, "wadr_std_impute.csv"))
+write.csv(wadr_std_impute,file.path(write_output_base_path, "wadr_std_impute.csv"))
 
 ###  Perform PCA with scaling using SVD
 pca_impute <- pca_calc(wadr_std_impute)
@@ -332,20 +353,20 @@ pca_impute <- pca_calc(wadr_std_impute)
 pca_x_impute <- pca_reconstruct(data=wadr_std_impute, pca_fit = pca_impute)
 
 ### Save PC scores
-write.csv(pca_x_impute,file.path(write_output_path, "PC_Score_impute.csv"))
+write.csv(pca_x_impute,file.path(write_output_base_path, "pc_score_impute.csv"))
 
 ### Create a table showing PCA diagnostics
 scree_df <- data.frame(cbind(Component=seq(1,dim(pca_impute$importance)[2]),t(pca_impute$importance)))
 scree_df$EigenVal <- scree_df$Standard.deviation^2
 
 ### Cut to first 20 and save to file
-write.csv(scree_df[1:20,],file.path(write_output_path, "PCA_Var_Exp_impute.csv"), row.names=FALSE)
+write.csv(scree_df[1:20,],file.path(write_output_base_path, "pca_var_exp_impute.csv"), row.names=FALSE)
 
 ### Plot diagnostics for PCA Imputed
-pca_plot_wrapper(data=scree_df, write_folder=file.path(write_figures_path,"PCA_Impute"), write_file="PCA_impute")
+pca_plot_wrapper(data=scree_df, write_folder=write_path, write_file="pca_impute")
 
 ### Plot Loadings for PCA Imputed
-pca_loading_plot_wrapper(pca_loading=pca_impute$loadings, pc.n=12, write_folder=file.path(write_figures_path, "PCA_Impute"), write_file="PCA_impute")
+pca_loading_plot_wrapper(pca_loading=pca_impute$loadings, pc.n=12, write_folder=write_path, write_file="pca_impute" )
 
 
 
