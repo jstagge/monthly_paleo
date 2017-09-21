@@ -291,11 +291,13 @@ post_proc_mat <- matrix(unlist(rec_model_ts_postproc$ts$post_proc),2,12, byrow=T
 rownames(post_proc_mat) <- c("mean", "sd")
 
 ### Write postprocessing to csv file
+write_output_path <- file.path(file.path(write_output_base_path, "model_fit"), site_n)
 dir.create(file.path(write_output_path, "postproc"), recursive=TRUE)
 write_location <- file.path(file.path(file.path(write_output_base_path, "ts"), site_n), paste0("postproc/", model_name_n, "_postproc.csv"))
 write.csv(post_proc_mat, file = write_location,row.names=TRUE)
 
 ### Write timseries to csv file
+write_output_path <- file.path(file.path(write_output_base_path, "ts"), site_n)
 write_location <- file.path(write_output_path, paste0(model_name_n, "_postproc_ts.csv"))
 write.csv(rec_model_ts_postproc$ts$ts, file = write_location,row.names=TRUE)
 }
