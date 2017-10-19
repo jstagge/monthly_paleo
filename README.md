@@ -70,13 +70,15 @@ Rscript 06_gof.R
 
 ## Reference and How to Cite
 
-For any description of this methodology, please use the following citation:
+For any description of this methodology, please use the following citation (s):
 
 * Stagge, J.H., Rosenberg, D.E., DeRose, R.J., and Rittenour, T.M. (2017) "Monthly paleostream-flow reconstruction from annual tree-ring chronologies." Journal of Hydrology.
 
-For any use of this code, please cite the above paper and the following:
+* Stagge, J.H. (2017) "monthly_paleo: Code repository accompanying Stagge et al. (2017)." doi: 10.5281/zenodo.889892.
 
+To refer to the PaleoAPR R package used in this study, please use the following citation:
 
+* Stagge, J.H. (2017) "paleoAPR: Monthly streamflow reconstruction package for R." R package version 1.0. doi: 10.5281/zenodo.889892.
 
 ## Authors
 

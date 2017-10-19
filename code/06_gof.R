@@ -160,8 +160,11 @@ monthly_obs_ts <- get(paste0(site_name_n, "_monthly_obs_ts"))
 ### Set output folder for time series and make sure folder exists
 read_path <- file.path(file.path(write_output_base_path, "ts"), site_n)
 ### Read time series
-reconst_ts <- read.csv(file.path(read_path, paste0(model_name_n, "_ts.csv")), row.names = 1)
-#reconst_ts_postproc <- read.csv(file.path(read_path, paste0(model_name_n, "_postproc_ts.csv")), row.names = 1)
+if (file.exists(file.path(read_path, paste0(model_name_n, "_postproc_ts.csv"))) == TRUE){
+	reconst_ts <- read.csv(file.path(read_path, paste0(model_name_n, "_postproc_ts.csv")), row.names = 1)
+} else {
+	reconst_ts <- read.csv(file.path(read_path, paste0(model_name_n, "_ts.csv")), row.names = 1)
+}
 ### Remove t column because it fouls merging
 reconst_ts <- reconst_ts[,!(colnames(reconst_ts) %in% "t")]
 
@@ -532,8 +535,8 @@ test <- reconst_ts$method == "AP Model\nReconstructed Flow"
 ### Create plot
 p <- ggplot(reconst_ts[!test,], aes(x=date, y=flow_est, color=method, linetype=method))
 #p <- p + geom_line(data=monthly_obs_ts, size=0.25)
-p <- p + geom_line(size=0.25)
-p <- p + geom_line(data=subset(reconst_ts, method=="flow_annual"), size=0.45)
+p <- p + geom_line(size=0.35)
+p <- p + geom_line(data=subset(reconst_ts, method=="flow_annual"), size=0.55)
 p <- p + scale_x_date(name="Date", breaks=seq(as.Date("800-01-01"), as.Date("2030-01-01"), by="5 years"), date_labels = "%Y")
 p <- p + scale_y_continuous(name=expression(bold(paste("Monthly Mean Discharge  ( ",m^3,"/s )"))))
 p <- p + theme_classic_new()
@@ -551,8 +554,8 @@ ggsave(paste0(pub_path,"/svg/fig_8a.svg"), p, width=6, height=4)
 ### Save publication Figure 8b
 p <- ggplot(reconst_ts, aes(x=date, y=flow_est, color=method, linetype=method))
 #p <- p + geom_line(data=monthly_obs_ts, size=0.25)
-p <- p + geom_line(size=0.25)
-p <- p + geom_line(data=subset(reconst_ts, method=="flow_annual"), size=0.45)
+p <- p + geom_line(size=0.35)
+p <- p + geom_line(data=subset(reconst_ts, method=="flow_annual"), size=0.55)
 p <- p + scale_x_date(name="Date", breaks=seq(as.Date("800-01-01"), as.Date("2030-01-01"), by="5 years"), date_labels = "%Y")
 p <- p + scale_y_continuous(name=expression(bold(paste("Monthly Mean Discharge  ( ",m^3,"/s )"))))
 p <- p + theme_classic_new()
@@ -566,6 +569,91 @@ ggsave(paste0(pub_path,"/png/fig_8b.png"), p, width=6, height=4, dpi=600)
 ggsave(paste0(pub_path,"/pdf/fig_8b.pdf"), p, width=6, height=4)
 ggsave(paste0(pub_path,"/svg/fig_8b.svg"), p, width=6, height=4)
 
+
+
+
+
+###########################################################################
+## Create 1730s and 1970s figure  Pub Fig 8a and 8b
+###########################################################################
+site_n <- "10011500"
+site_name_n <- "bear"
+data_n <- "rec"
+
+### Read in annual and observed
+monthly_obs_ts <- get(paste0(site_name_n, "_monthly_obs_ts"))
+monthly_obs_ts <- monthly_obs_ts$ts
+colnames(monthly_obs_ts)[3] <- "flow_est"
+monthly_obs_ts$method <- "flow_obs"
+
+annual_rec_ts <- get(paste0(site_name_n, "_annual_",data_n,"_ts"))
+annual_rec_ts <- annual_rec_ts$ts
+year_range <- c(min(annual_rec_ts["water_year"], na.rm=TRUE)-1, max(annual_rec_ts["water_year"], na.rm=TRUE)+1)
+monthly_ts <- expand.grid(month = seq(1,12), year = seq(year_range[1], year_range[2]))
+monthly_ts$water_year <- usgs_wateryear(monthly_ts$year, monthly_ts$month, 10)
+annual_rec_ts <- merge(monthly_ts, annual_rec_ts, all.x=TRUE)
+colnames(annual_rec_ts)[4] <- "flow_est"
+annual_rec_ts$method <- "flow_annual"
+
+### Set output folder for time series and make sure folder exists
+read_path <- file.path(file.path(write_output_base_path, "ts"), site_n)
+### Read time series
+reconst_ap <- read.csv(file.path(read_path, "10011500_ap_rec_ts.csv"), row.names = 1)
+reconst_apr <- read.csv(file.path(read_path, "10011500_apr_rec_clim_pca_impute_ts.csv"), row.names = 1)
+
+### Add method columns
+reconst_ap$method <- "ap"
+reconst_apr$method <- "apr"
+
+### Combine all data
+reconst_ts <- rbind(reconst_ap[,c("month", "year", "flow_est", "method")], reconst_apr[,c("month", "year", "flow_est", "method")])
+reconst_ts <- rbind(reconst_ts, monthly_obs_ts[,c("month", "year", "flow_est", "method")])
+reconst_ts <- rbind(reconst_ts, annual_rec_ts[,c("month", "year", "flow_est", "method")])
+
+### Create date column 
+reconst_ts$date <- as.Date(paste0(reconst_ts$year, "-", reconst_ts$month, "-15"))
+
+### Factor Methods column
+reconst_ts$method <- factor(reconst_ts$method, levels = c("flow_obs", "flow_annual", "ap", "apr"), labels = c("Observed Flow ", "Annual Reconstruction", "AP Model\nReconstructed Flow", "APR Model\nReconstructed Flow"))
+
+test <- reconst_ts$method == "AP Model\nReconstructed Flow"
+
+### Create plot
+p <- ggplot(reconst_ts[!test,], aes(x=date, y=flow_est, color=method, linetype=method))
+#p <- p + geom_line(data=monthly_obs_ts, size=0.25)
+p <- p + geom_line(size=0.35)
+p <- p + geom_line(data=subset(reconst_ts, method=="flow_annual"), size=0.45)
+p <- p + scale_x_date(name="Date", breaks=seq(as.Date("800-01-01"), as.Date("2030-01-01"), by="5 years"), date_labels = "%Y")
+p <- p + scale_y_continuous(name=expression(bold(paste("Monthly Mean Discharge  ( ",m^3,"/s )"))))
+p <- p + theme_classic_new()
+p <- p + coord_cartesian(xlim=c(as.Date("1715-01-01"), as.Date("1745-01-01")))
+p <- p + scale_colour_manual(name= NULL, values = c("black", "#377eb8", "#e41a1c"))
+p <- p + scale_linetype_manual(values=c("solid", "longdash", "solid", "solid"), guide=FALSE)
+p <- p +  theme(legend.position="bottom")
+p
+
+### Save publication Figure 8a
+ggsave(paste0(pub_path,"/png/fig_8c.png"), p, width=6, height=4, dpi=600)
+ggsave(paste0(pub_path,"/pdf/fig_8c.pdf"), p, width=6, height=4)
+ggsave(paste0(pub_path,"/svg/fig_8c.svg"), p, width=6, height=4)
+
+### Save publication Figure 8b
+p <- ggplot(reconst_ts, aes(x=date, y=flow_est, color=method, linetype=method))
+#p <- p + geom_line(data=monthly_obs_ts, size=0.25)
+p <- p + geom_line(size=0.35)
+p <- p + geom_line(data=subset(reconst_ts, method=="flow_annual"), size=0.45)
+p <- p + scale_x_date(name="Date", breaks=seq(as.Date("800-01-01"), as.Date("2030-01-01"), by="5 years"), date_labels = "%Y")
+p <- p + scale_y_continuous(name=expression(bold(paste("Monthly Mean Discharge  ( ",m^3,"/s )"))))
+p <- p + theme_classic_new()
+p <- p + coord_cartesian(xlim=c(as.Date("1960-01-01"), as.Date("1975-01-01")))
+p <- p + scale_colour_manual(name= NULL, values = c("black", "#377eb8", "#4daf4a", "#e41a1c"))
+p <- p + scale_linetype_manual(values=c("solid", "longdash", "solid", "solid"), guide=FALSE)
+p <- p +  theme(legend.position="bottom")
+p
+
+ggsave(paste0(pub_path,"/png/fig_8d.png"), p, width=6, height=4, dpi=600)
+ggsave(paste0(pub_path,"/pdf/fig_8d.pdf"), p, width=6, height=4)
+ggsave(paste0(pub_path,"/svg/fig_8d.svg"), p, width=6, height=4)
 
 
 
