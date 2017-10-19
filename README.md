@@ -1,6 +1,6 @@
 # Generating Monthly Paleostreamflow Reconstructions
 
-[![DOI](https://zenodo.org/badge/84120707.svg)](https://zenodo.org/badge/latestdoi/84120707)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1029739.svg)](https://doi.org/10.5281/zenodo.1029739)
 
 This repository contains code designed to disaggregate and reconstruct monthly streamflows directly from annual streamflow reconstructions, reconstructions of global circulation, and potential differences among regional tree-ring chronologies related to tree species and geographic location. It is presented here to replicate the results in [Stagge et al. (2017)](http://) and to provide a reference for others wishing to use these methods to reconstruct streamflow records.  
 
